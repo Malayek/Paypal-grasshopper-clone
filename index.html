@@ -1,6 +1,6 @@
 
 
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -53,15 +53,11 @@
       font-family: inherit;
     }
 
-    /* App container */
-
     .app {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
-
-    /* Top bar with tabs (Hotels.com style) */
 
     .topbar {
       position: sticky;
@@ -158,8 +154,6 @@
         justify-content: space-between;
       }
     }
-
-    /* Hero full-screen section */
 
     .hero {
       position: relative;
@@ -324,8 +318,6 @@
       border: 1px solid rgba(148,163,184,0.7);
     }
 
-    /* Main content wrapper (below hero) */
-
     .main-content {
       background: radial-gradient(circle at top, #0b1120 0, #020617 40%, #000 100%);
       padding: 22px 18px 32px;
@@ -412,8 +404,6 @@
       border-color: rgba(56,189,248,0.9);
       color: #e0f2fe;
     }
-
-    /* Home article and quick lesson */
 
     .article {
       font-size: 13px;
@@ -512,8 +502,6 @@
 
     .pill-dot.blue { background: #38bdf8; }
     .pill-dot.gold { background: #eab308; }
-
-    /* Lessons tab: search + article */
 
     .search-bar {
       margin-bottom: 10px;
@@ -622,8 +610,6 @@
       color: var(--muted);
     }
 
-    /* History tab */
-
     .history-table-wrapper {
       margin-top: 6px;
       border-radius: var(--radius-md);
@@ -716,8 +702,6 @@
       color: #4ade80;
     }
 
-    /* Feed tab */
-
     .feed-list {
       display: flex;
       flex-direction: column;
@@ -767,8 +751,6 @@
       flex-wrap: wrap;
       gap: 6px;
     }
-
-    /* Profile tab */
 
     .profile-layout {
       display: grid;
@@ -867,8 +849,6 @@
       color: #020617;
     }
 
-    /* Simple toast */
-
     .toast {
       position: fixed;
       bottom: 16px;
@@ -913,8 +893,6 @@
       cursor: pointer;
     }
 
-    /* Screens visibility */
-
     .screen {
       display: none;
     }
@@ -927,7 +905,6 @@
 <body>
 <div class="app">
 
-  <!-- Top bar -->
   <header class="topbar">
     <div class="topbar-inner">
       <div class="brand">
@@ -947,7 +924,6 @@
     </div>
   </header>
 
-  <!-- Hero (Home top) -->
   <section class="hero" id="heroSection">
     <div class="hero-bg"></div>
     <div class="hero-overlay"></div>
@@ -991,10 +967,8 @@
     </div>
   </section>
 
-  <!-- Screens (tabs) -->
   <main>
 
-    <!-- HOME SCREEN BELOW HERO -->
     <section class="main-content screen active" id="screen-home">
       <div class="content-inner">
         <h2 class="section-title">Your first coding stay</h2>
@@ -1095,7 +1069,6 @@
       </div>
     </section>
 
-    <!-- LESSONS SCREEN -->
     <section class="main-content screen" id="screen-lessons">
       <div class="content-inner">
         <h2 class="section-title">Lessons & questions</h2>
@@ -1160,7 +1133,6 @@
       </div>
     </section>
 
-    <!-- HISTORY SCREEN -->
     <section class="main-content screen" id="screen-history">
       <div class="content-inner">
         <h2 class="section-title">Your history</h2>
@@ -1217,7 +1189,6 @@
       </div>
     </section>
 
-    <!-- FEED SCREEN -->
     <section class="main-content screen" id="screen-feed">
       <div class="content-inner">
         <h2 class="section-title">Feedback & activity feed</h2>
@@ -1262,7 +1233,6 @@
       </div>
     </section>
 
-    <!-- PROFILE SCREEN -->
     <section class="main-content screen" id="screen-profile">
       <div class="content-inner">
         <h2 class="section-title">Your profile</h2>
@@ -1319,7 +1289,6 @@
 
   </main>
 
-  <!-- Toast -->
   <div class="toast hidden" id="toast">
     <div class="toast-icon">✓</div>
     <div>
@@ -1513,19 +1482,6 @@
 
   toastClose.addEventListener("click", () => toast.classList.add("hidden"));
 
-  tabs.forEach(tab => {
-    tab.addEventListener("click", () => {
-      const target = tab.dataset.screen;
-      tabs.forEach(t => t.classList.toggle("active", t === tab));
-      Object.entries(screens).forEach(([key, el]) => {
-        el.classList.toggle("active", key === target);
-      });
-      if (target === "history") renderHistory();
-      if (target === "feed") renderFeed();
-      if (target === "profile") renderProfile();
-    });
-  });
-
   heroStart.addEventListener("click", () => {
     openLessonsTabAndSelect("hello-console");
   });
@@ -1540,10 +1496,7 @@
   });
 
   function openLessonsTabAndSelect(lessonId) {
-    tabs.forEach(t => t.classList.toggle("active", t.dataset.screen === "lessons"));
-    Object.entries(screens).forEach(([key, el]) => {
-      el.classList.toggle("active", key === "lessons");
-    });
+    setActiveScreen("lessons");
     selectLesson(lessonId);
   }
 
@@ -1881,7 +1834,7 @@
     showToast("Profile updated", "Your display name has been updated and mock‑verified.");
   });
 
-  function init() {
+  function renderAll() {
     renderLessonsList();
     renderHomeSummary();
     renderHistory();
@@ -1889,7 +1842,51 @@
     renderProfile();
   }
 
-  init();
+  // TAB ROUTING – make tabs really functional with hash "routes"
+
+  function setActiveScreen(screenKey, fromHash = false) {
+    tabs.forEach(tab => {
+      tab.classList.toggle("active", tab.dataset.screen === screenKey);
+    });
+
+    Object.entries(screens).forEach(([key, el]) => {
+      el.classList.toggle("active", key === screenKey);
+    });
+
+    if (!fromHash) {
+      window.location.hash = screenKey;
+    }
+
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      const screenKey = tab.dataset.screen;
+      if (!screens[screenKey]) return;
+      setActiveScreen(screenKey);
+      if (screenKey === "history") renderHistory();
+      if (screenKey === "feed") renderFeed();
+      if (screenKey === "profile") renderProfile();
+    });
+  });
+
+  function handleHashChange() {
+    const hash = window.location.hash.replace("#", "") || "home";
+    if (screens[hash]) {
+      setActiveScreen(hash, true);
+      if (hash === "history") renderHistory();
+      if (hash === "feed") renderFeed();
+      if (hash === "profile") renderProfile();
+    } else {
+      setActiveScreen("home", true);
+    }
+  }
+
+  window.addEventListener("hashchange", handleHashChange);
+
+  renderAll();
+  handleHashChange();
 </script>
 
 </body>
