@@ -1,11 +1,13 @@
-<!DOCTYPE html>
+
+
+    <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>CodeSprout – Learn to Code</title>
+  <title>CodeStay – Learn With Us</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Google Fonts -->
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
@@ -16,28 +18,27 @@
     }
 
     :root {
-      --bg: #050816;
-      --bg-alt: #0b1020;
-      --bg-soft: #12172a;
-      --accent: #00c896;
-      --accent-soft: rgba(0, 200, 150, 0.12);
-      --accent-strong: #00f5b8;
-      --danger: #ff4d6a;
+      --bg: #020617;
+      --bg-soft: #0b1120;
+      --bg-card: #020617;
+      --accent: #22c55e;
+      --accent-soft: rgba(34, 197, 94, 0.22);
+      --accent-strong: #16a34a;
+      --accent-blue: #38bdf8;
       --text: #f9fafb;
       --muted: #9ca3af;
       --border: #1f2937;
-      --card-radius: 18px;
-      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.55);
+      --danger: #f97373;
+      --shadow: 0 22px 60px rgba(0, 0, 0, 0.75);
+      --radius-lg: 22px;
+      --radius-md: 14px;
     }
 
     body {
       font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #111827 0, #020617 40%, #000 100%);
+      background: radial-gradient(circle at top, #111827 0, #020617 50%, #000 100%);
       color: var(--text);
       min-height: 100vh;
-      display: flex;
-      align-items: stretch;
-      justify-content: center;
     }
 
     a {
@@ -46,716 +47,341 @@
     }
 
     button {
-      cursor: pointer;
       border: none;
       outline: none;
+      cursor: pointer;
       font-family: inherit;
     }
 
-    /* Auth & Landing layout */
+    /* App container */
 
-    .app-shell {
-      width: 100%;
+    .app {
       min-height: 100vh;
-      display: none;
-    }
-
-    .auth-shell {
-      width: 100%;
-      min-height: 100vh;
-      display: flex;
-      align-items: stretch;
-      justify-content: center;
-      color: var(--text);
-    }
-
-    .auth-container {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-      width: 100%;
-      max-width: 1120px;
-      margin: 24px;
-      border-radius: 32px;
-      overflow: hidden;
-      background: linear-gradient(145deg, #020617 0%, #020617 40%, #020617 100%);
-      box-shadow: 0 26px 80px rgba(0, 0, 0, 0.85);
-      border: 1px solid rgba(148, 163, 184, 0.12);
-    }
-
-    .auth-hero {
-      position: relative;
-      padding: 34px 36px;
-      background: radial-gradient(circle at top left, #22c55e 0, #22c55e 8%, transparent 20%) no-repeat,
-                  radial-gradient(circle at top right, #38bdf8 0, #38bdf8 9%, transparent 22%) no-repeat,
-                  radial-gradient(circle at 20% 80%, #eab308 0, #eab308 8%, transparent 28%) no-repeat,
-                  radial-gradient(circle at 80% 90%, #ec4899 0, #ec4899 7%, transparent 24%) no-repeat,
-                  radial-gradient(circle at 50% 40%, #1f2937 0, #020617 52%);
-      background-size: 420px 420px, 360px 360px, 180px 180px, 200px 200px, cover;
-      color: white;
-    }
-
-    .auth-hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image: url("https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=1600");
-      background-size: cover;
-      background-position: center;
-      opacity: 0.18;
-      mix-blend-mode: screen;
-      pointer-events: none;
-    }
-
-    .auth-hero-inner {
-      position: relative;
-      z-index: 2;
       display: flex;
       flex-direction: column;
-      height: 100%;
     }
 
-    .auth-logo {
-      display: inline-flex;
+    /* Top bar with tabs (Hotels.com style) */
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: linear-gradient(180deg, rgba(15,23,42,0.96), rgba(15,23,42,0.92));
+      border-bottom: 1px solid rgba(30,64,175,0.8);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+    }
+
+    .topbar-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 10px 18px;
+      display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 7px 12px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.68);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      backdrop-filter: blur(20px);
-      align-self: flex-start;
+      justify-content: space-between;
+      gap: 16px;
     }
 
-    .auth-logo-icon {
-      width: 24px;
-      height: 24px;
-      border-radius: 8px;
-      background: conic-gradient(from 210deg, #22c55e, #22c55e, #38bdf8, #eab308, #ec4899, #22c55e);
-      display: inline-flex;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 14px;
+      background: conic-gradient(from 200deg, #22c55e, #22c55e, #38bdf8, #a855f7, #22c55e);
+      display: flex;
       align-items: center;
       justify-content: center;
       color: #020617;
-      font-size: 16px;
       font-weight: 700;
+      box-shadow: 0 18px 40px rgba(34, 197, 94, 0.7);
     }
 
-    .auth-logo-text {
-      font-size: 14px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+    .brand-text-main {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .brand-text-sub {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      background: rgba(15,23,42,0.9);
+      border-radius: 999px;
+      padding: 4px;
+      border: 1px solid rgba(148,163,184,0.4);
+    }
+
+    .tab {
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--muted);
+      background: transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+    }
+
+    .tab span.icon {
+      font-size: 13px;
+    }
+
+    .tab.active {
+      background: radial-gradient(circle at top, rgba(34,197,94,0.55), rgba(16,185,129,0.5), rgba(15,23,42,0.98));
+      color: var(--text);
+      box-shadow: 0 16px 40px rgba(16,185,129,0.6);
+    }
+
+    .tab:hover {
+      background: rgba(31,41,55,0.9);
       color: #e5e7eb;
     }
 
-    .auth-hero-main {
-      margin-top: 40px;
-      max-width: 480px;
+    @media (max-width: 768px) {
+      .topbar-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .tabs {
+        width: 100%;
+        justify-content: space-between;
+      }
     }
 
-    .auth-hero-kicker {
-      font-size: 13px;
+    /* Hero full-screen section */
+
+    .hero {
+      position: relative;
+      min-height: calc(100vh - 70px);
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      color: #f9fafb;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url("https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=1600");
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.45);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, transparent 0, rgba(15,23,42,0.4) 35%, rgba(15,23,42,0.86) 72%, #020617 100%);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 32px 18px 38px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 20px;
+    }
+
+    .hero-kicker {
+      font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 0.18em;
-      color: rgba(226, 232, 240, 0.82);
-      margin-bottom: 10px;
+      color: #d1d5db;
     }
 
-    .auth-hero-title {
-      font-size: 42px;
-      line-height: 1.1;
+    .hero-title {
+      font-size: 40px;
+      line-height: 1.08;
+      max-width: 520px;
       font-weight: 700;
-      letter-spacing: -0.04em;
+      letter-spacing: -0.045em;
     }
 
-    .auth-hero-title span {
-      background: linear-gradient(135deg, #22c55e, #22c55e, #38bdf8, #a855f7);
+    .hero-title span {
+      background: linear-gradient(135deg, #22c55e, #22c55e, #38bdf8);
       -webkit-background-clip: text;
       color: transparent;
     }
 
-    .auth-hero-subtitle {
-      margin-top: 18px;
+    .hero-subtitle {
+      max-width: 520px;
       font-size: 15px;
       line-height: 1.6;
-      color: rgba(226, 232, 240, 0.88);
+      color: #e5e7eb;
     }
 
-    .auth-hero-pills {
+    .hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 26px;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 12px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(148, 163, 184, 0.3);
-      font-size: 12px;
-      color: rgba(226, 232, 240, 0.92);
-    }
-
-    .pill-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.35);
-    }
-
-    .pill-dot.blue {
-      background: #38bdf8;
-      box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.4);
-    }
-
-    .pill-dot.gold {
-      background: #eab308;
-      box-shadow: 0 0 0 4px rgba(234, 179, 8, 0.35);
-    }
-
-    .auth-hero-bottom {
-      margin-top: auto;
-      padding-top: 26px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 16px;
-      font-size: 13px;
-      color: rgba(226, 232, 240, 0.82);
-    }
-
-    .auth-avatars {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .avatar-stack {
-      display: inline-flex;
-    }
-
-    .avatar-stack img {
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      border: 2px solid #020617;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.75);
-      object-fit: cover;
-      margin-left: -10px;
-    }
-
-    .avatar-stack img:first-child {
-      margin-left: 0;
-    }
-
-    .auth-hero-badge {
-      background: rgba(15, 23, 42, 0.8);
-      border-radius: 999px;
-      padding: 4px 10px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-    }
-
-    .auth-hero-badge span {
-      color: #e5e7eb;
-    }
-
-    .auth-hero-badge strong {
-      color: #22c55e;
-      margin-left: 6px;
-    }
-
-    .auth-form-side {
-      background: radial-gradient(circle at top, #0b1020 0, #020617 60%, #000 100%);
-      padding: 32px 30px;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
-
-    .auth-form-card {
-      margin-top: 32px;
-      padding: 22px 20px 22px;
-      border-radius: 24px;
-      background: rgba(15, 23, 42, 0.96);
-      border: 1px solid rgba(148, 163, 184, 0.2);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(16px);
-    }
-
-    .chip-row {
-      display: inline-flex;
-      padding: 3px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.38);
-      gap: 4px;
-    }
-
-    .chip {
-      padding: 5px 12px;
-      border-radius: 999px;
-      font-size: 12px;
-      color: rgba(209, 213, 219, 0.88);
-      cursor: pointer;
-      background: transparent;
-    }
-
-    .chip.active {
-      background: linear-gradient(135deg, #22c55e, #14b8a6);
-      color: #020617;
-      font-weight: 600;
-      box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.74);
-    }
-
-    .auth-form-title {
-      margin-top: 18px;
-      font-size: 22px;
-      font-weight: 600;
-      color: #e5e7eb;
-    }
-
-    .auth-form-subtitle {
-      font-size: 13px;
-      color: #9ca3af;
       margin-top: 4px;
     }
 
-    .auth-form-fields {
-      margin-top: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      font-size: 13px;
-    }
-
-    .field label {
-      color: #d1d5db;
-    }
-
-    .field input {
-      background: radial-gradient(circle at top left, #020617 0, #020617 40%, #020617 100%);
-      border-radius: 999px;
-      border: 1px solid #1f2937;
-      padding: 9px 12px;
-      color: #e5e7eb;
-      font-size: 13px;
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
-    }
-
-    .field input:focus {
-      border-color: #22c55e;
-      box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.7), 0 0 0 8px rgba(34, 197, 94, 0.15);
-      background: radial-gradient(circle at top left, #020617 0, #020617 50%, #020617 100%);
-    }
-
-    .auth-actions {
-      margin-top: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
     .btn-primary {
-      width: 100%;
+      padding: 10px 18px;
       border-radius: 999px;
-      padding: 9px 16px;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #020617;
       font-size: 14px;
       font-weight: 500;
       display: inline-flex;
       align-items: center;
-      justify-content: center;
       gap: 8px;
-      background: linear-gradient(135deg, #22c55e, #16a34a);
-      color: #020617;
-      box-shadow: 0 18px 40px rgba(22, 163, 74, 0.7);
-      transition: transform 0.1s, box-shadow 0.1s, filter 0.1s;
+      box-shadow: 0 20px 40px rgba(16,185,129,0.85);
     }
 
     .btn-primary:hover {
-      transform: translateY(-1px);
       filter: brightness(1.04);
-      box-shadow: 0 20px 50px rgba(22, 163, 74, 0.8);
-    }
-
-    .btn-primary:active {
-      transform: translateY(0);
-      box-shadow: 0 12px 28px rgba(22, 163, 74, 0.6);
+      transform: translateY(-1px);
     }
 
     .btn-secondary {
-      width: 100%;
+      padding: 9px 15px;
       border-radius: 999px;
-      padding: 9px 16px;
+      background: rgba(15,23,42,0.88);
+      border: 1px solid rgba(148,163,184,0.7);
+      color: #e5e7eb;
       font-size: 13px;
       display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      background: rgba(15, 23, 42, 0.9);
-      color: #e5e7eb;
-      border: 1px solid #374151;
-      transition: background 0.15s, border-color 0.15s, transform 0.1s;
-    }
-
-    .btn-secondary:hover {
-      background: rgba(17, 24, 39, 0.96);
-      border-color: #4b5563;
-      transform: translateY(-0.5px);
-    }
-
-    .auth-meta {
-      margin-top: 20px;
-      font-size: 12px;
-      color: #6b7280;
-      display: flex;
-      justify-content: space-between;
       align-items: center;
       gap: 8px;
     }
 
-    .auth-meta span {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .auth-meta span::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: radial-gradient(circle, #22c55e 0, #16a34a 55%, #15803d 100%);
-      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.28);
-    }
-
-    .auth-meta a {
-      color: #9ca3af;
-      text-decoration: underline;
-      text-decoration-style: dotted;
-    }
-
-    /* MAIN APP LAYOUT */
-
-    .app-shell {
+    .hero-meta {
       display: flex;
-      background: radial-gradient(circle at top, #111827 0, #020617 50%, #000 100%);
-      color: var(--text);
-    }
-
-    .sidebar {
-      width: 260px;
-      min-height: 100vh;
-      background: linear-gradient(180deg, rgba(15, 23, 42, 1) 0%, #020617 100%);
-      border-right: 1px solid rgba(31, 41, 55, 0.8);
-      padding: 18px 16px 16px;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      box-shadow: 20px 0 60px rgba(0, 0, 0, 0.6);
-      z-index: 10;
-    }
-
-    .sidebar-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 6px 8px 10px;
-    }
-
-    .sidebar-brand-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 14px;
-      background: conic-gradient(from 220deg, #22c55e, #22c55e, #38bdf8, #a855f7, #eab308, #22c55e);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: #020617;
-      font-weight: 700;
-      font-size: 18px;
-      box-shadow: 0 12px 30px rgba(22, 163, 74, 0.6);
-    }
-
-    .sidebar-title {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .sidebar-title-main {
-      font-size: 17px;
-      font-weight: 600;
-    }
-
-    .sidebar-title-sub {
-      font-size: 11px;
-      color: #9ca3af;
-    }
-
-    .sidebar-menu {
-      margin-top: 22px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .sidebar-section-label {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: #6b7280;
-      padding: 0 6px;
-      margin-bottom: 6px;
-    }
-
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      font-size: 13px;
-      color: #d1d5db;
-      cursor: pointer;
-      border: 1px solid transparent;
-      transition: background 0.15s, transform 0.1s, border-color 0.15s, box-shadow 0.15s;
-    }
-
-    .nav-item:hover {
-      background: rgba(31, 41, 55, 0.9);
-      border-color: rgba(148, 163, 184, 0.4);
-      transform: translateY(-0.5px);
-    }
-
-    .nav-item.active {
-      background: linear-gradient(135deg, rgba(34, 197, 94, 0.18), rgba(16, 185, 129, 0.12));
-      border-color: rgba(45, 212, 191, 0.7);
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 8px;
+      font-size: 12px;
       color: #e5e7eb;
-      box-shadow: 0 16px 40px rgba(20, 184, 166, 0.45);
     }
 
-    .nav-icon {
-      width: 24px;
-      height: 24px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(75, 85, 99, 0.8);
+    .hero-pill {
       display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-    }
-
-    .nav-item span {
-      flex: 1;
-    }
-
-    .nav-pill {
-      font-size: 11px;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      color: #9ca3af;
-    }
-
-    .sidebar-footer {
-      margin-top: auto;
-      padding-top: 18px;
-      border-top: 1px dashed rgba(55, 65, 81, 0.8);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .sidebar-profile-mini {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(75, 85, 99, 0.8);
-    }
-
-    .sidebar-profile-mini img {
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      object-fit: cover;
-      border: 2px solid #22c55e;
-    }
-
-    .sidebar-profile-meta {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .sidebar-profile-meta strong {
-      font-size: 13px;
-    }
-
-    .sidebar-profile-meta span {
-      font-size: 11px;
-      color: #9ca3af;
-    }
-
-    .sidebar-logout-btn {
-      padding: 6px 9px;
-      border-radius: 999px;
-      font-size: 11px;
-      border: 1px solid rgba(148, 163, 184, 0.8);
-      background: rgba(15, 23, 42, 0.85);
-      color: #e5e7eb;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .sidebar-logout-btn:hover {
-      background: rgba(30, 64, 175, 0.95);
-      border-color: rgba(129, 140, 248, 0.9);
-    }
-
-    .app-main {
-      flex: 1;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .app-topbar {
-      padding: 14px 22px;
-      border-bottom: 1px solid rgba(31, 41, 55, 0.9);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      backdrop-filter: blur(14px);
-      background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.85));
-      position: sticky;
-      top: 0;
-      z-index: 5;
-    }
-
-    .topbar-left {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .topbar-title {
-      font-size: 17px;
-      font-weight: 500;
-      display: flex;
       align-items: center;
       gap: 8px;
-    }
-
-    .topbar-title span {
-      font-size: 13px;
-      color: #9ca3af;
-      font-weight: 400;
-    }
-
-    .topbar-subtitle {
-      font-size: 12px;
-      color: #6b7280;
-    }
-
-    .topbar-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .chip-soft {
-      font-size: 12px;
       padding: 5px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      background: rgba(15, 23, 42, 0.9);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: #d1d5db;
+      background: rgba(15,23,42,0.85);
+      border: 1px solid rgba(148,163,184,0.5);
     }
 
-    .chip-soft span {
-      font-size: 11px;
-      color: #9ca3af;
-    }
-
-    .chip-soft strong {
-      color: #22c55e;
-    }
-
-    .chip-soft.blue strong {
-      color: #38bdf8;
-    }
-
-    .chip-soft.gold strong {
-      color: #eab308;
-    }
-
-    .chip-dot {
+    .hero-pill-dot {
       width: 8px;
       height: 8px;
       border-radius: 999px;
       background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34,197,94,0.35);
     }
 
-    .chip-dot.blue {
-      background: #38bdf8;
-    }
-
-    .chip-dot.gold {
-      background: #eab308;
-    }
-
-    .app-content {
-      flex: 1;
-      padding: 18px 22px 22px;
+    .hero-footer {
       display: flex;
-      flex-direction: column;
-      gap: 16px;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+      font-size: 12px;
+      color: #d1d5db;
+      align-items: center;
     }
 
-    .grid {
+    .hero-avatar-stack {
+      display: inline-flex;
+    }
+
+    .hero-avatar-stack img {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 2px solid #020617;
+      object-fit: cover;
+      box-shadow: 0 14px 28px rgba(0,0,0,0.8);
+      margin-left: -10px;
+    }
+
+    .hero-avatar-stack img:first-child {
+      margin-left: 0;
+    }
+
+    .hero-rating {
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.7);
+    }
+
+    /* Main content wrapper (below hero) */
+
+    .main-content {
+      background: radial-gradient(circle at top, #0b1120 0, #020617 40%, #000 100%);
+      padding: 22px 18px 32px;
+    }
+
+    .content-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .grid-two {
       display: grid;
       grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
       gap: 16px;
       align-items: flex-start;
     }
 
+    @media (max-width: 900px) {
+      .grid-two {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
     .card {
-      border-radius: var(--card-radius);
+      border-radius: var(--radius-lg);
       background: radial-gradient(circle at top, #020617 0, #020617 50%, #020617 100%);
-      border: 1px solid rgba(31, 41, 55, 0.9);
-      box-shadow: var(--shadow-soft);
-      padding: 14px 14px 14px;
+      border: 1px solid rgba(31,41,55,0.9);
+      box-shadow: var(--shadow);
+      padding: 16px 14px 14px;
       position: relative;
-      overflow: hidden;
     }
 
     .card-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 10px;
       gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .card-header-main {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
 
     .card-title {
@@ -765,628 +391,293 @@
 
     .card-subtitle {
       font-size: 12px;
-      color: #6b7280;
+      color: var(--muted);
     }
 
     .badge-soft {
-      padding: 3px 8px;
-      border-radius: 999px;
       font-size: 11px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: rgba(15, 23, 42, 0.9);
-      color: #9ca3af;
-    }
-
-    .progress-wrapper {
-      margin-top: 6px;
-    }
-
-    .progress-bar {
-      position: relative;
-      width: 100%;
-      height: 8px;
+      padding: 4px 8px;
       border-radius: 999px;
-      background: #020617;
-      overflow: hidden;
-      border: 1px solid #111827;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.6);
+      color: var(--muted);
     }
 
-    .progress-bar-fill {
-      height: 100%;
-      width: 0%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, #22c55e, #22c55e, #16a34a);
-      box-shadow: 0 0 24px rgba(22, 163, 74, 0.9);
-      transition: width 0.25s ease-out;
+    .badge-soft.green {
+      border-color: rgba(34,197,94,0.9);
+      color: #bbf7d0;
     }
 
-    .progress-label {
-      margin-top: 4px;
-      font-size: 11px;
-      color: #9ca3af;
+    .badge-soft.blue {
+      border-color: rgba(56,189,248,0.9);
+      color: #e0f2fe;
+    }
+
+    /* Home article and quick lesson */
+
+    .article {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .article h3 {
+      font-size: 14px;
+      margin: 10px 0 4px;
+      color: #e5e7eb;
+    }
+
+    .article p {
+      margin-bottom: 8px;
+    }
+
+    .article-list {
+      margin: 6px 0 8px;
+      padding-left: 16px;
+    }
+
+    .article-list li {
+      margin-bottom: 4px;
+    }
+
+    .quick-lesson {
+      margin-top: 10px;
+      border-radius: var(--radius-md);
+      background: rgba(15,23,42,0.96);
+      border: 1px solid rgba(55,65,81,0.95);
+      padding: 10px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .quick-lesson-top {
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+
+    .quick-lesson-meta {
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-small {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(55,65,81,0.9);
+      background: rgba(15,23,42,0.96);
+      color: #e5e7eb;
+      font-size: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-small.primary {
+      border-color: rgba(34,197,94,0.9);
+      background: linear-gradient(135deg, rgba(34,197,94,0.16), rgba(16,185,129,0.26));
+      box-shadow: 0 14px 32px rgba(16,185,129,0.5);
     }
 
     .pill-row {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      margin-top: 10px;
+      margin-top: 6px;
     }
 
     .pill-tag {
       padding: 4px 8px;
-      font-size: 11px;
       border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      color: #9ca3af;
+      border: 1px solid rgba(55,65,81,0.9);
+      background: rgba(15,23,42,0.95);
+      font-size: 11px;
+      color: var(--muted);
       display: inline-flex;
       align-items: center;
       gap: 6px;
     }
 
-    .pill-tag-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: #22c55e;
-    }
-
-    .pill-tag-dot.blue {
-      background: #38bdf8;
-    }
-
-    .pill-tag-dot.orange {
-      background: #f97316;
-    }
-
-    .pill-tag-dot.pink {
-      background: #ec4899;
-    }
-
-    .hero-banner {
-      display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-      gap: 16px;
-      align-items: stretch;
-      margin-top: 8px;
-    }
-
-    .hero-copy {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      justify-content: center;
-    }
-
-    .hero-eyebrow {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: #9ca3af;
-    }
-
-    .hero-headline {
-      font-size: 19px;
-      font-weight: 600;
-      letter-spacing: -0.03em;
-    }
-
-    .hero-headline span {
-      background: linear-gradient(135deg, #22c55e, #22c55e, #38bdf8);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .hero-body {
-      font-size: 13px;
-      color: #9ca3af;
-    }
-
-    .hero-cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 6px;
-    }
-
-    .btn-small {
-      padding: 7px 12px;
-      font-size: 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      background: rgba(15, 23, 42, 0.95);
-      color: #e5e7eb;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn-small.primary {
-      border-color: rgba(34, 197, 94, 0.8);
-      background: linear-gradient(135deg, rgba(34, 197, 94, 0.16), rgba(16, 185, 129, 0.2));
-      box-shadow: 0 14px 26px rgba(16, 185, 129, 0.4);
-    }
-
-    .hero-img {
-      border-radius: 18px;
-      overflow: hidden;
-      position: relative;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      background: radial-gradient(circle at center, #111827 0, #020617 60%);
-    }
-
-    .hero-img img {
-      width: 100%;
-      height: 100%;
-      max-height: 200px;
-      object-fit: cover;
-      display: block;
-      opacity: 0.92;
-    }
-
-    .hero-img-overlay {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top, transparent 0, transparent 55%, rgba(0, 0, 0, 0.9) 100%);
-      pointer-events: none;
-    }
-
-    .hero-img-badge {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-      right: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      font-size: 11px;
-      color: #e5e7eb;
-    }
-
-    .hero-img-badge span {
-      background: rgba(15, 23, 42, 0.85);
-      border-radius: 999px;
-      padding: 4px 9px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
-    }
-
-    .hero-img-badge strong {
-      color: #22c55e;
-    }
-
-    .lesson-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-top: 6px;
-      max-height: 280px;
-      overflow-y: auto;
-      padding-right: 6px;
-    }
-
-    .lesson-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 9px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(31, 41, 55, 0.9);
-      cursor: pointer;
-      transition: background 0.15s, transform 0.1s, border-color 0.15s;
-      font-size: 13px;
-    }
-
-    .lesson-item:hover {
-      background: rgba(31, 41, 55, 0.95);
-      border-color: rgba(148, 163, 184, 0.6);
-      transform: translateY(-1px);
-    }
-
-    .lesson-item.active {
-      background: linear-gradient(135deg, rgba(34, 197, 94, 0.16), rgba(16, 185, 129, 0.2));
-      border-color: rgba(34, 197, 94, 0.9);
-      box-shadow: 0 16px 40px rgba(16, 185, 129, 0.5);
-    }
-
-    .lesson-status-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: #4b5563;
-      box-shadow: 0 0 0 4px rgba(17, 24, 39, 0.92);
-    }
-
-    .lesson-status-dot.completed {
-      background: #22c55e;
-      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.3);
-    }
-
-    .lesson-status-dot.locked {
-      background: #6b7280;
-      box-shadow: 0 0 0 4px rgba(55, 65, 81, 0.9);
-    }
-
-    .lesson-status-dot.current {
-      background: #38bdf8;
-      box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.38);
-    }
-
-    .lesson-main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .lesson-main strong {
-      font-size: 13px;
-    }
-
-    .lesson-main span {
-      font-size: 11px;
-      color: #9ca3af;
-    }
-
-    .lesson-meta {
-      font-size: 11px;
-      color: #9ca3af;
-    }
-
-    .lesson-meta span {
-      margin-right: 10px;
-    }
-
-    .lesson-meta .pill-sm {
-      padding: 3px 8px;
-      border-radius: 999px;
-      border: 1px solid #374151;
-      background: rgba(15, 23, 42, 0.9);
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: #9ca3af;
-    }
-
-    .editor-card {
-      margin-top: 10px;
-    }
-
-    .editor-tabs {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 8px;
-    }
-
-    .editor-tab {
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: 11px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      background: rgba(15, 23, 42, 0.92);
-      color: #9ca3af;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .editor-tab.active {
-      background: radial-gradient(circle at top, rgba(34, 197, 94, 0.3) 0, rgba(16, 185, 129, 0.35) 45%, rgba(15, 23, 42, 0.98) 100%);
-      border-color: rgba(16, 185, 129, 0.9);
-      color: #e5e7eb;
-      box-shadow: 0 16px 40px rgba(16, 185, 129, 0.6);
-    }
-
-    .editor-area-wrapper {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: 10px;
-      align-items: stretch;
-    }
-
-    .editor-area {
-      border-radius: 16px;
-      background: rgba(15, 23, 42, 0.98);
-      border: 1px solid rgba(31, 41, 55, 0.96);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    .editor-header {
-      padding: 6px 9px;
-      font-size: 11px;
-      color: #9ca3af;
-      border-bottom: 1px solid rgba(31, 41, 55, 0.96);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      background: radial-gradient(circle at top left, rgba(31, 41, 55, 0.85), rgba(15, 23, 42, 0.96));
-    }
-
-    .editor-header span {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .editor-header-dots {
-      display: inline-flex;
-      gap: 4px;
-    }
-
-    .editor-header-dots span {
+    .pill-dot {
       width: 7px;
       height: 7px;
       border-radius: 999px;
-      background: #ef4444;
-    }
-
-    .editor-header-dots span:nth-child(2) {
-      background: #eab308;
-    }
-
-    .editor-header-dots span:nth-child(3) {
       background: #22c55e;
     }
 
-    .editor-textarea {
+    .pill-dot.blue { background: #38bdf8; }
+    .pill-dot.gold { background: #eab308; }
+
+    /* Lessons tab: search + article */
+
+    .search-bar {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.96);
+      border: 1px solid rgba(55,65,81,0.9);
+      padding: 6px 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .search-bar input {
       flex: 1;
-      resize: none;
       border: none;
       outline: none;
       background: transparent;
       color: #e5e7eb;
-      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 12px;
-      padding: 10px 11px;
-      line-height: 1.5;
-      tab-size: 2;
-      overflow: auto;
+      font-size: 13px;
     }
 
-    .editor-textarea::placeholder {
-      color: #4b5563;
+    .search-bar span.icon {
+      font-size: 14px;
     }
 
-    .output-frame {
-      flex: 1;
+    .lesson-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .lesson-card {
+      border-radius: var(--radius-md);
+      background: rgba(15,23,42,0.98);
+      border: 1px solid rgba(55,65,81,0.96);
+      padding: 10px 10px;
+      display: grid;
+      grid-template-columns: 90px minmax(0,1fr);
+      gap: 10px;
+      cursor: pointer;
+      transition: transform 0.12s, box-shadow 0.12s, border-color 0.12s;
+    }
+
+    .lesson-card:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 36px rgba(0,0,0,0.7);
+      border-color: rgba(34,197,94,0.8);
+    }
+
+    @media (max-width: 640px) {
+      .lesson-card {
+        grid-template-columns: minmax(0,1fr);
+      }
+    }
+
+    .lesson-thumb {
+      border-radius: 12px;
+      overflow: hidden;
+      height: 72px;
       background: #020617;
-      border-top: 1px solid rgba(15, 23, 42, 1);
-      position: relative;
     }
 
-    .output-inner {
-      position: absolute;
-      inset: 0;
-      padding: 8px 10px;
-      overflow: auto;
-      font-family: system-ui, -apple-system, ui-sans-serif;
-      color: #e5e7eb;
-      font-size: 12px;
-    }
-
-    .output-inner iframe {
+    .lesson-thumb img {
       width: 100%;
       height: 100%;
-      border: none;
-      background: white;
-      border-radius: 10px;
+      object-fit: cover;
     }
 
-    .output-placeholder {
-      font-size: 12px;
-      color: #6b7280;
+    .lesson-body {
       display: flex;
       flex-direction: column;
       gap: 4px;
     }
 
-    .editor-controls {
-      margin-top: 8px;
+    .lesson-title-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 8px;
-      font-size: 12px;
-      color: #9ca3af;
     }
 
-    .editor-controls-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .editor-controls-right {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn-ghost {
-      padding: 5px 10px;
-      border-radius: 999px;
-      font-size: 11px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      background: rgba(15, 23, 42, 0.96);
-      color: #9ca3af;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-    }
-
-    .btn-ghost.primary {
-      border-color: rgba(34, 197, 94, 0.9);
-      color: #e5e7eb;
-    }
-
-    .badge {
-      font-size: 11px;
-      padding: 2px 6px;
-      border-radius: 999px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      background: rgba(15, 23, 42, 0.95);
-      color: #9ca3af;
-    }
-
-    .badge.green {
-      border-color: rgba(34, 197, 94, 0.9);
-      color: #bbf7d0;
-      background: rgba(22, 163, 74, 0.12);
-    }
-
-    .badge.red {
-      border-color: rgba(248, 113, 113, 0.9);
-      color: #fecaca;
-      background: rgba(220, 38, 38, 0.18);
-    }
-
-    .badge.blue {
-      border-color: rgba(56, 189, 248, 0.9);
-      color: #e0f2fe;
-      background: rgba(37, 99, 235, 0.15);
-    }
-
-    .badge.gold {
-      border-color: rgba(234, 179, 8, 0.96);
-      color: #fef3c7;
-      background: rgba(202, 138, 4, 0.18);
-    }
-
-    .hint-area, .solution-area {
-      margin-top: 6px;
-      font-size: 12px;
-      color: #9ca3af;
-      background: rgba(15, 23, 42, 0.96);
-      border-radius: 12px;
-      padding: 6px 8px;
-      border: 1px dashed rgba(55, 65, 81, 0.9);
-    }
-
-    .hint-area strong, .solution-area strong {
-      color: #e5e7eb;
-    }
-
-    .hint-area.hidden, .solution-area.hidden {
-      display: none;
-    }
-
-    .reward-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 10px;
-      margin-top: 8px;
-    }
-
-    .reward-card {
-      border-radius: 14px;
-      background: rgba(15, 23, 42, 0.96);
-      border: 1px solid rgba(55, 65, 81, 0.95);
-      padding: 8px 9px;
-      font-size: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .reward-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .reward-card-title {
+    .lesson-title {
+      font-size: 13px;
       font-weight: 500;
-      font-size: 12px;
     }
 
-    .reward-card-body {
+    .lesson-meta-row {
       font-size: 11px;
-      color: #9ca3af;
-    }
-
-    .reward-card-footer {
+      color: var(--muted);
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-wrap: wrap;
       gap: 8px;
-      margin-top: 4px;
     }
 
-    .btn-micro {
-      padding: 3px 6px;
-      font-size: 11px;
+    .lesson-meta-tag {
+      padding: 3px 7px;
       border-radius: 999px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      background: rgba(2, 6, 23, 0.98);
-      color: #e5e7eb;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      cursor: pointer;
+      background: rgba(15,23,42,0.98);
+      border: 1px solid rgba(55,65,81,0.9);
     }
 
-    .btn-micro.disabled {
-      opacity: 0.45;
-      cursor: default;
+    .lesson-desc {
+      font-size: 12px;
+      color: var(--muted);
     }
 
-    .history-table {
+    /* History tab */
+
+    .history-table-wrapper {
+      margin-top: 6px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(31,41,55,0.96);
+      overflow: hidden;
+      max-height: 280px;
+    }
+
+    table.history-table {
       width: 100%;
       border-collapse: collapse;
       font-size: 12px;
-      margin-top: 6px;
     }
 
     .history-table th,
     .history-table td {
       padding: 6px 8px;
-      border-bottom: 1px solid rgba(31, 41, 55, 0.96);
+      border-bottom: 1px solid rgba(31,41,55,0.96);
     }
 
     .history-table th {
       text-align: left;
+      background: rgba(15,23,42,0.98);
+      color: var(--muted);
       font-weight: 500;
-      color: #9ca3af;
-      background: rgba(15, 23, 42, 0.96);
       position: sticky;
       top: 0;
       z-index: 1;
     }
 
-    .history-table tbody tr:nth-child(even) {
-      background: rgba(15, 23, 42, 0.92);
+    .history-table tr:nth-child(odd) td {
+      background: rgba(15,23,42,0.96);
     }
 
-    .history-table tbody tr:nth-child(odd) {
-      background: rgba(15, 23, 42, 0.98);
+    .history-table tr:nth-child(even) td {
+      background: rgba(15,23,42,0.9);
     }
 
-    .history-table .status-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 3px 8px;
+    .status-pill {
+      padding: 3px 7px;
       border-radius: 999px;
       font-size: 11px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
     .status-pill.success {
-      background: rgba(22, 163, 74, 0.16);
+      background: rgba(22,163,74,0.16);
       color: #bbf7d0;
     }
 
     .status-pill.fail {
-      background: rgba(248, 113, 113, 0.18);
+      background: rgba(248,113,113,0.18);
       color: #fecaca;
     }
 
@@ -1394,16 +685,16 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-top: 6px;
+      margin-top: 8px;
       font-size: 12px;
     }
 
     .stat-card {
       flex: 1;
-      min-width: 120px;
-      border-radius: 14px;
-      background: rgba(15, 23, 42, 0.98);
-      border: 1px solid rgba(55, 65, 81, 0.95);
+      min-width: 140px;
+      border-radius: var(--radius-md);
+      background: rgba(15,23,42,0.98);
+      border: 1px solid rgba(55,65,81,0.95);
       padding: 8px 9px;
       display: flex;
       flex-direction: column;
@@ -1412,7 +703,7 @@
 
     .stat-label {
       font-size: 11px;
-      color: #9ca3af;
+      color: var(--muted);
     }
 
     .stat-value {
@@ -1425,11 +716,71 @@
       color: #4ade80;
     }
 
+    /* Feed tab */
+
+    .feed-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .feed-card {
+      border-radius: var(--radius-md);
+      background: rgba(15,23,42,0.98);
+      border: 1px solid rgba(55,65,81,0.95);
+      padding: 10px 10px;
+      display: grid;
+      grid-template-columns: 40px minmax(0,1fr);
+      gap: 10px;
+      font-size: 12px;
+    }
+
+    .feed-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 2px solid rgba(59,130,246,0.9);
+    }
+
+    .feed-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .feed-main {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .feed-title {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .feed-meta {
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    /* Profile tab */
+
     .profile-layout {
       display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-      gap: 12px;
-      margin-top: 6px;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 14px;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 900px) {
+      .profile-layout {
+        grid-template-columns: minmax(0,1fr);
+      }
     }
 
     .profile-main {
@@ -1439,12 +790,12 @@
     }
 
     .profile-main img {
-      width: 64px;
-      height: 64px;
+      width: 72px;
+      height: 72px;
       border-radius: 999px;
       object-fit: cover;
-      border: 2px solid #22c55e;
-      box-shadow: 0 12px 28px rgba(22, 163, 74, 0.6);
+      border: 2px solid var(--accent);
+      box-shadow: 0 16px 40px rgba(34,197,94,0.7);
     }
 
     .profile-meta {
@@ -1459,7 +810,7 @@
 
     .profile-meta span {
       font-size: 12px;
-      color: #9ca3af;
+      color: var(--muted);
     }
 
     .profile-badges {
@@ -1472,14 +823,14 @@
     .profile-badge {
       padding: 4px 8px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.8);
-      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148,163,184,0.8);
+      background: rgba(15,23,42,0.96);
       font-size: 11px;
     }
 
     .profile-side {
       font-size: 12px;
-      color: #9ca3af;
+      color: var(--muted);
     }
 
     .profile-side ul {
@@ -1488,103 +839,51 @@
     }
 
     .profile-side li {
-      margin-bottom: 2px;
+      margin-bottom: 3px;
     }
 
-    .hidden {
-      display: none !important;
-    }
-
-    @media (max-width: 960px) {
-      .auth-container {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .auth-hero {
-        display: none;
-      }
-
-      .sidebar {
-        position: fixed;
-        inset: 0 auto 0 0;
-        width: 230px;
-        transform: translateX(-100%);
-        transition: transform 0.22s ease-out;
-        z-index: 30;
-      }
-
-      .sidebar.open {
-        transform: translateX(0);
-      }
-
-      .app-topbar {
-        padding: 10px 14px;
-      }
-
-      .app-content {
-        padding: 12px 12px 16px;
-      }
-
-      .grid,
-      .hero-banner,
-      .editor-area-wrapper,
-      .profile-layout {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    @media (max-width: 640px) {
-      .auth-container {
-        margin: 16px;
-      }
-
-      .auth-form-side {
-        padding: 22px 20px;
-      }
-
-      .auth-form-card {
-        padding: 18px 16px;
-      }
-
-      .card {
-        padding: 11px 11px 11px;
-      }
-    }
-
-    .mobile-menu-btn {
-      display: none;
-      border-radius: 999px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      background: rgba(15, 23, 42, 0.96);
-      color: #e5e7eb;
-      padding: 6px 9px;
+    .verification-banner {
+      margin-top: 8px;
+      border-radius: var(--radius-md);
+      background: rgba(22,163,74,0.1);
+      border: 1px solid rgba(22,163,74,0.7);
+      padding: 8px 10px;
       font-size: 12px;
+      color: #bbf7d0;
+      display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
 
-    @media (max-width: 960px) {
-      .mobile-menu-btn {
-        display: inline-flex;
-      }
+    .verification-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: radial-gradient(circle,#22c55e,#16a34a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: #020617;
     }
+
+    /* Simple toast */
 
     .toast {
       position: fixed;
       bottom: 16px;
       right: 16px;
-      min-width: 220px;
-      max-width: 320px;
+      max-width: 280px;
       border-radius: 14px;
-      padding: 10px 12px;
-      background: rgba(15, 23, 42, 0.98);
-      border: 1px solid rgba(34, 197, 94, 0.9);
-      color: #e5e7eb;
-      font-size: 12px;
+      background: rgba(15,23,42,0.98);
+      border: 1px solid rgba(34,197,94,0.9);
+      box-shadow: 0 18px 40px rgba(22,163,74,0.7);
+      padding: 8px 10px;
       display: flex;
       align-items: flex-start;
       gap: 8px;
-      box-shadow: 0 18px 40px rgba(22, 163, 74, 0.7);
+      font-size: 12px;
+      color: #e5e7eb;
       z-index: 40;
     }
 
@@ -1596,460 +895,317 @@
       width: 18px;
       height: 18px;
       border-radius: 999px;
-      background: radial-gradient(circle, #22c55e 0, #15803d 80%);
-      display: inline-flex;
+      background: radial-gradient(circle,#22c55e,#16a34a);
+      display: flex;
       align-items: center;
       justify-content: center;
       font-size: 11px;
-    }
-
-    .toast-content strong {
-      font-size: 13px;
-      display: block;
-      margin-bottom: 2px;
+      color: #020617;
     }
 
     .toast-close {
       border-radius: 999px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      background: rgba(15, 23, 42, 0.96);
-      color: #9ca3af;
+      border: 1px solid rgba(55,65,81,0.9);
+      background: rgba(15,23,42,0.96);
+      color: var(--muted);
       font-size: 11px;
       padding: 1px 6px;
       cursor: pointer;
     }
+
+    /* Screens visibility */
+
+    .screen {
+      display: none;
+    }
+
+    .screen.active {
+      display: block;
+    }
   </style>
 </head>
 <body>
+<div class="app">
 
-  <div class="auth-shell" id="authView">
-    <div class="auth-container">
-      <div class="auth-hero">
-        <div class="auth-hero-inner">
-          <div class="auth-logo">
-            <div class="auth-logo-icon">C</div>
-            <span class="auth-logo-text">Codesprout Studio</span>
-          </div>
-          <div class="auth-hero-main">
-            <div class="auth-hero-kicker">Interactive JavaScript playground</div>
-            <h1 class="auth-hero-title">
-              Learn to code with puzzles that feel like a <span>game</span>.
-            </h1>
-            <p class="auth-hero-subtitle">
-              CodeSprout is a Grasshopper‑style web classroom where you write real JavaScript, get instant feedback, and unlock levels, badges and daily streaks.
-            </p>
-            <div class="auth-hero-pills">
-              <div class="pill">
-                <div class="pill-dot"></div>
-                <span>No installs – runs in your browser.</span>
-              </div>
-              <div class="pill">
-                <div class="pill-dot blue"></div>
-                <span>Short lessons for busy brains.</span>
-              </div>
-              <div class="pill">
-                <div class="pill-dot gold"></div>
-                <span>Earn coins and Grass badges.</span>
-              </div>
-            </div>
-          </div>
-          <div class="auth-hero-bottom">
-            <div class="auth-avatars">
-              <div class="avatar-stack">
-                <img src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=200" alt="">
-                <img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=200" alt="">
-                <img src="https://images.pexels.com/photos/1181715/pexels-photo-1181715.jpeg?auto=compress&cs=tinysrgb&w=200" alt="">
-              </div>
-              <div class="auth-hero-badge">
-                <span>Beginner projects completed</span>
-                <strong>12,431</strong>
-              </div>
-            </div>
-            <div>
-              <div style="font-size:12px;margin-bottom:2px;">“It feels like solving tiny puzzles, not reading a textbook.”</div>
-              <div style="font-size:11px;color:#9ca3af;">– Learner from Lahore</div>
-            </div>
-          </div>
+  <!-- Top bar -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-logo">CS</div>
+        <div>
+          <div class="brand-text-main">CodeStay</div>
+          <div class="brand-text-sub">Learn to code, like booking a stay.</div>
         </div>
       </div>
+      <nav class="tabs" id="tabs">
+        <button class="tab active" data-screen="home"><span class="icon">🏠</span>Home</button>
+        <button class="tab" data-screen="lessons"><span class="icon">📚</span>Lessons</button>
+        <button class="tab" data-screen="history"><span class="icon">📜</span>History</button>
+        <button class="tab" data-screen="feed"><span class="icon">📰</span>Feed</button>
+        <button class="tab" data-screen="profile"><span class="icon">👤</span>Profile</button>
+      </nav>
+    </div>
+  </header>
 
-      <div class="auth-form-side">
-        <div style="font-size:11px;color:#9ca3af;text-transform:uppercase;letter-spacing:0.16em;">Welcome</div>
-        <div style="font-size:18px;font-weight:600;">Sign in to start coding</div>
-
-        <div class="auth-form-card">
-          <div class="chip-row">
-            <button class="chip active" id="chipSignup">Create account</button>
-            <button class="chip" id="chipLogin">I already have one</button>
-          </div>
-          <div class="auth-form-title" id="authTitle">Get your free coding profile</div>
-          <div class="auth-form-subtitle" id="authSubtitle">
-            Choose a username – we’ll use it to save your lessons, coins and badges in this browser.
-          </div>
-
-          <div class="auth-form-fields">
-            <div class="field">
-              <label for="authUsername">Username</label>
-              <input id="authUsername" placeholder="e.g. code_ninja" autocomplete="off" />
-            </div>
-            <div class="field">
-              <label for="authPassword">Password</label>
-              <input id="authPassword" type="password" placeholder="At least 4 characters" />
-            </div>
-          </div>
-
-          <div class="auth-actions">
-            <button class="btn-primary" id="authPrimaryBtn">
-              <span id="authPrimaryLabel">Create my profile</span>
-              <span>→</span>
-            </button>
-            <button class="btn-secondary" id="authSecondaryBtn">
-              Try a quick guest session
-            </button>
-          </div>
-
-          <div class="auth-meta">
-            <span>Progress is saved locally on this device.</span>
-            <a href="#" id="authLearnMore">How it works</a>
-          </div>
+  <!-- Hero (Home top) -->
+  <section class="hero" id="heroSection">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-inner">
+      <div class="hero-kicker">Learn with us</div>
+      <h1 class="hero-title">
+        One screen, one laptop, one <span>first lesson</span>.
+      </h1>
+      <p class="hero-subtitle">
+        CodeStay is a beginner‑friendly playground where you learn JavaScript through tiny stories, questions and instant feedback – no installs, just your browser.
+      </p>
+      <div class="hero-actions">
+        <button class="btn-primary" id="btnHeroStart">
+          Start your first lesson
+          <span>→</span>
+        </button>
+        <button class="btn-secondary" id="btnHeroQuick">
+          Try a 2‑minute quick lesson
+        </button>
+      </div>
+      <div class="hero-meta">
+        <div class="hero-pill">
+          <div class="hero-pill-dot"></div>
+          <span>Beginner‑friendly content.</span>
+        </div>
+        <div class="hero-pill">
+          <div class="hero-pill-dot"></div>
+          <span>Progress saved in your browser.</span>
+        </div>
+      </div>
+      <div class="hero-footer">
+        <div class="hero-avatar-stack">
+          <img src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=200" alt="">
+          <img src="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=200" alt="">
+          <img src="https://images.pexels.com/photos/3861942/pexels-photo-3861942.jpeg?auto=compress&cs=tinysrgb&w=200" alt="">
+        </div>
+        <div class="hero-rating">
+          4.8★ “It feels like checking in to a new hotel of ideas, every lesson.” – learner
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="app-shell" id="appView">
-    <aside class="sidebar" id="sidebar">
-      <div class="sidebar-header">
-        <div class="sidebar-brand-icon">C</div>
-        <div class="sidebar-title">
-          <div class="sidebar-title-main">CodeSprout</div>
-          <div class="sidebar-title-sub">Grasshopper‑style lab</div>
+  <!-- Screens (tabs) -->
+  <main>
+
+    <!-- HOME SCREEN BELOW HERO -->
+    <section class="main-content screen active" id="screen-home">
+      <div class="content-inner">
+        <h2 class="section-title">Your first coding stay</h2>
+        <p class="section-subtitle">
+          Scroll down from the hero image into your first article‑lesson, then jump into questions and a quick exercise.
+        </p>
+
+        <div class="grid-two">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-main">
+                <div class="card-title">Article: Why “Hello, World” still matters</div>
+                <div class="card-subtitle">
+                  A short story‑style article that introduces your very first JavaScript line.
+                </div>
+              </div>
+              <span class="badge-soft">Lesson article #1</span>
+            </div>
+            <div class="article">
+              <p>
+                Imagine you open the door of a brand‑new hotel room. There’s a welcome card on the table that simply says “Hello”. In coding, that welcome card is your <em>Hello, World</em> program.
+              </p>
+              <p>
+                Your browser is the room; JavaScript is how you talk to it. When you write one line of code and the browser replies correctly, you’ve checked in.
+              </p>
+              <h3>What you’ll do in this first lesson</h3>
+              <ul class="article-list">
+                <li>Open the browser console – your secret control panel.</li>
+                <li>Type one line of JavaScript that says hello to the world.</li>
+                <li>See an instant response, like a friendly receptionist.</li>
+              </ul>
+              <p>
+                We’ll start very small on purpose. The goal is not to be clever, it’s to prove that you can speak to the computer and it listens.
+              </p>
+
+              <div class="quick-lesson">
+                <div class="quick-lesson-top">
+                  <div>
+                    <strong>Try: print your first message</strong>
+                  </div>
+                  <button class="btn-small primary" id="btnHomeStartLesson">
+                    Start lesson 1
+                  </button>
+                </div>
+                <div class="quick-lesson-meta">
+                  <span>3 minutes</span>
+                  <span>+20 XP</span>
+                  <span>Beginner</span>
+                </div>
+                <p style="font-size:12px;color:var(--muted);">
+                  When you press “Start lesson 1”, we’ll move you to the Lessons tab and load your first question set.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-main">
+                <div class="card-title">Your learning summary</div>
+                <div class="card-subtitle">
+                  Track how many questions you’ve answered and what’s coming next.
+                </div>
+              </div>
+              <span class="badge-soft green" id="summaryLevelBadge">Level 1 · 0 XP</span>
+            </div>
+            <div class="stats-row">
+              <div class="stat-card">
+                <div class="stat-label">Lessons completed</div>
+                <div class="stat-value" id="summaryLessons">0</div>
+                <div class="stat-trend" id="summaryLessonsTrend">Start your first lesson above.</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Questions answered</div>
+                <div class="stat-value" id="summaryQuestions">0</div>
+                <div class="stat-trend" id="summaryQuestionsTrend">You haven’t answered any yet.</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Coins earned</div>
+                <div class="stat-value" id="summaryCoins">0</div>
+                <div class="stat-trend" id="summaryCoinsTrend">Complete lessons to unlock coins.</div>
+              </div>
+            </div>
+            <div class="pill-row">
+              <div class="pill-tag">
+                <div class="pill-dot"></div> Beginner JavaScript
+              </div>
+              <div class="pill-tag">
+                <div class="pill-dot blue"></div> Story‑based lessons
+              </div>
+              <div class="pill-tag">
+                <div class="pill-dot gold"></div> XP & coins rewards
+              </div>
+            </div>
+          </div>
         </div>
+
       </div>
+    </section>
 
-      <div class="sidebar-menu">
-        <div class="sidebar-section-label">Overview</div>
-        <div class="nav-item active" data-screen="home">
-          <div class="nav-icon">🏠</div>
-          <span>Home</span>
-          <div class="nav-pill" id="navXP">Lvl 1 · 0 XP</div>
+    <!-- LESSONS SCREEN -->
+    <section class="main-content screen" id="screen-lessons">
+      <div class="content-inner">
+        <h2 class="section-title">Lessons & questions</h2>
+        <p class="section-subtitle">
+          Search topics, read lesson articles, and open your question sets. Think of it like browsing different hotel rooms for your brain. [web:36][web:39]
+        </p>
+
+        <div class="grid-two">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-main">
+                <div class="card-title">Search lessons</div>
+                <div class="card-subtitle">
+                  Find lessons by topic – variables, buttons, loops, and more.
+                </div>
+              </div>
+              <span class="badge-soft blue" id="lessonCountBadge">0 lessons unlocked</span>
+            </div>
+            <div class="search-bar">
+              <span class="icon">🔍</span>
+              <input id="lessonSearchInput" placeholder="Search by title or topic (e.g. 'variables', 'loops')">
+              <span style="font-size:11px;color:var(--muted);" id="searchHint">Press Enter to save this search.</span>
+            </div>
+
+            <div class="lesson-feed" id="lessonFeed"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-main">
+                <div class="card-title" id="lessonDetailTitle">Lesson preview</div>
+                <div class="card-subtitle" id="lessonDetailSubtitle">
+                  Choose a lesson from the left to see its article and questions.
+                </div>
+              </div>
+              <span class="badge-soft" id="lessonDetailBadge">Nothing selected</span>
+            </div>
+            <div class="article" id="lessonDetailBody">
+              <p>
+                When you click a lesson card, you’ll see a short explanation, the questions you’ll answer, and what you’ll earn.
+              </p>
+            </div>
+            <div class="quick-lesson" id="lessonDetailQuick" style="margin-top:10px;">
+              <div class="quick-lesson-top">
+                <div>
+                  <strong id="lessonDetailQuickTitle">Pick a lesson to start.</strong>
+                </div>
+                <button class="btn-small primary" id="btnStartSelectedLesson" disabled>
+                  Start this lesson
+                </button>
+              </div>
+              <div class="quick-lesson-meta" id="lessonDetailQuickMeta">
+                <span>–</span>
+              </div>
+              <p style="font-size:12px;color:var(--muted);" id="lessonDetailQuickText">
+                Starting a lesson will add it to your history and update your Home summary.
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="nav-item" data-screen="lessons">
-          <div class="nav-icon">📚</div>
-          <span>Lessons</span>
-          <div class="nav-pill" id="navLessons">0 / 6 done</div>
-        </div>
-        <div class="nav-item" data-screen="challenge">
-          <div class="nav-icon">🧩</div>
-          <span>Live challenge</span>
-        </div>
-        <div class="nav-item" data-screen="rewards">
-          <div class="nav-icon">🏅</div>
-          <span>Rewards shop</span>
-          <div class="nav-pill" id="navCoins">0 coins</div>
-        </div>
-        <div class="nav-item" data-screen="history">
-          <div class="nav-icon">📊</div>
-          <span>Code history</span>
-        </div>
-        <div class="nav-item" data-screen="profile">
-          <div class="nav-icon">👤</div>
-          <span>Profile</span>
-        </div>
+
       </div>
+    </section>
 
-      <div class="sidebar-footer">
-        <div class="sidebar-profile-mini">
-          <img id="sidebarAvatar" src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=200" alt="">
-          <div class="sidebar-profile-meta">
-            <strong id="sidebarUsername">Learner</strong>
-            <span id="sidebarRole">Beginner · Level 1</span>
-          </div>
-        </div>
-        <button class="sidebar-logout-btn" id="logoutBtn">
-          <span>⟲</span> Switch user
-        </button>
-      </div>
-    </aside>
+    <!-- HISTORY SCREEN -->
+    <section class="main-content screen" id="screen-history">
+      <div class="content-inner">
+        <h2 class="section-title">Your history</h2>
+        <p class="section-subtitle">
+          Like a booking history on Hotels.com, this shows every lesson you opened, when you tried it, and what you earned. [web:30][web:34][web:36]
+        </p>
 
-    <main class="app-main">
-      <header class="app-topbar">
-        <div class="topbar-left">
-          <div class="topbar-title">
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-              ☰
-            </button>
-            <span id="topbarGreeting">Welcome back</span>
-            <span id="topbarUsername">Coder</span>
-          </div>
-          <div class="topbar-subtitle" id="topbarSubtitle">
-            Pick a lesson, type code in the editor, then press “Run” to see it in action instantly.
-          </div>
-        </div>
-        <div class="topbar-right">
-          <div class="chip-soft">
-            <div class="chip-dot"></div>
-            <span>Level</span>
-            <strong id="chipLevel">1</strong>
-          </div>
-          <div class="chip-soft blue">
-            <div class="chip-dot blue"></div>
-            <span>XP</span>
-            <strong id="chipXP">0 / 100</strong>
-          </div>
-          <div class="chip-soft gold">
-            <div class="chip-dot gold"></div>
-            <span>Coins</span>
-            <strong id="chipCoins">0</strong>
-          </div>
-        </div>
-      </header>
-
-      <section class="app-content" id="screenHome">
-        <div class="grid">
-          <div>
-            <div class="card">
-              <div class="card-header">
-                <div>
-                  <div class="card-title">Today’s learning path</div>
-                  <div class="card-subtitle">Complete 3 micro‑lessons to keep your streak alive.</div>
-                </div>
-                <span class="badge-soft">Daily streak: <span id="badgeStreak">0 days</span></span>
-              </div>
-              <div class="hero-banner">
-                <div class="hero-copy">
-                  <div class="hero-eyebrow">Grasshopper‑inspired</div>
-                  <div class="hero-headline">
-                    Type real JavaScript, see results in a live <span>playground</span>.
-                  </div>
-                  <div class="hero-body">
-                    Start with “Print your first message”, then move to variables and buttons. The code on the left powers the output on the right.
-                  </div>
-                  <div class="hero-cta-row">
-                    <button class="btn-small primary" id="btnContinueLesson">Continue where I left off →</button>
-                    <button class="btn-small" id="btnStartBeginner">Start at Lesson 1</button>
-                  </div>
-                </div>
-                <div class="hero-img">
-                  <img src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Person coding on laptop">
-                  <div class="hero-img-overlay"></div>
-                  <div class="hero-img-badge">
-                    <span>Live JavaScript preview</span>
-                    <span>XP boost <strong>+20%</strong> for your first 10 runs</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="card" style="margin-top:12px;">
-              <div class="card-header">
-                <div>
-                  <div class="card-title">Lesson track</div>
-                  <div class="card-subtitle">Work through bite‑sized challenges at your pace.</div>
-                </div>
-                <span class="badge-soft" id="lessonsSummary">0 / 6 completed</span>
-              </div>
-              <div class="progress-wrapper">
-                <div class="progress-bar">
-                  <div class="progress-bar-fill" id="overallProgressFill"></div>
-                </div>
-                <div class="progress-label">
-                  <span id="overallProgressLabel">You’ve finished 0% of this track.</span>
-                  <span id="overallProgressXP">0 XP earned</span>
-                </div>
-              </div>
-              <div class="pill-row">
-                <div class="pill-tag">
-                  <div class="pill-tag-dot"></div>
-                  Beginner JavaScript
-                </div>
-                <div class="pill-tag">
-                  <div class="pill-tag-dot blue"></div>
-                  Hands‑on exercises
-                </div>
-                <div class="pill-tag">
-                  <div class="pill-tag-dot.orange"></div>
-                  Live preview editor
-                </div>
-                <div class="pill-tag">
-                  <div class="pill-tag-dot.pink"></div>
-                  Achievements & coins
-                </div>
-              </div>
-              <div class="lesson-list" id="lessonListHome"></div>
-            </div>
-          </div>
-
-          <div>
-            <div class="card">
-              <div class="card-header">
-                <div>
-                  <div class="card-title">Active challenge</div>
-                  <div class="card-subtitle" id="activeLessonTitleSub">Pick a lesson to load starter code in the editor.</div>
-                </div>
-                <span class="badge-soft" id="activeLessonBadge">No challenge selected</span>
-              </div>
-              <div class="editor-card">
-                <div class="editor-tabs">
-                  <button class="editor-tab active" data-lang="html">HTML</button>
-                  <button class="editor-tab" data-lang="css">CSS</button>
-                  <button class="editor-tab" data-lang="js">JavaScript</button>
-                </div>
-
-                <div class="editor-area-wrapper">
-                  <div class="editor-area">
-                    <div class="editor-header">
-                      <span>
-                        <div class="editor-header-dots">
-                          <span></span><span></span><span></span>
-                        </div>
-                        <span id="editorFilename">index.html</span>
-                      </span>
-                      <span id="editorStatus">Idle</span>
-                    </div>
-                    <textarea class="editor-textarea" id="editorTextarea" spellcheck="false"></textarea>
-                  </div>
-                  <div class="editor-area">
-                    <div class="editor-header">
-                      <span>
-                        <div class="editor-header-dots">
-                          <span></span><span></span><span></span>
-                        </div>
-                        <span>Output</span>
-                      </span>
-                      <span id="outputStatus">Waiting for code…</span>
-                    </div>
-                    <div class="output-frame">
-                      <div class="output-inner" id="outputInner">
-                        <div class="output-placeholder">
-                          <strong>Run your code to see it here.</strong>
-                          <span>We’ll render your HTML, CSS and JavaScript inside a sandboxed iframe.</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="editor-controls">
-                  <div class="editor-controls-left">
-                    <button class="btn-ghost primary" id="btnRunCode">
-                      ▶ Run code
-                    </button>
-                    <button class="btn-ghost" id="btnResetCode">
-                      ↺ Reset starter code
-                    </button>
-                  </div>
-                  <div class="editor-controls-right">
-                    <span id="runCounter">Runs: 0</span>
-                    <span id="challengeXP" class="badge blue">+0 XP</span>
-                    <span id="challengeStatusBadge" class="badge">No attempt yet</span>
-                  </div>
-                </div>
-
-                <div class="hint-area hidden" id="hintBox">
-                  <strong>Hint:</strong>
-                  <span id="hintText"></span>
-                </div>
-                <div class="solution-area hidden" id="solutionBox">
-                  <strong>Solution snippet:</strong>
-                  <pre id="solutionText" style="margin-top:4px;white-space:pre-wrap;font-family:inherit;"></pre>
-                </div>
-
-                <div class="editor-controls" style="margin-top:6px;">
-                  <div class="editor-controls-left">
-                    <button class="btn-ghost" id="btnShowHint">💡 Reveal hint</button>
-                    <button class="btn-ghost" id="btnShowSolution">✨ Reveal solution</button>
-                  </div>
-                  <div class="editor-controls-right">
-                    <span style="font-size:11px;">Coins reward: <span id="challengeCoins">0</span> 🪙</span>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="app-content hidden" id="screenLessons">
         <div class="card">
           <div class="card-header">
-            <div>
-              <div class="card-title">All lessons</div>
-              <div class="card-subtitle">Unlock concepts step by step. Completed lessons give you extra coins.</div>
+            <div class="card-header-main">
+              <div class="card-title">Lesson & question log</div>
+              <div class="card-subtitle">
+                Each row is an attempt: which lesson, your result, XP, coins, and time.
+              </div>
             </div>
-            <span class="badge-soft" id="lessonsSummary2">0 / 6 completed</span>
+            <span class="badge-soft" id="historyBadge">0 attempts</span>
           </div>
-          <div class="lesson-list" id="lessonListFull"></div>
-        </div>
-      </section>
 
-      <section class="app-content hidden" id="screenChallenge">
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <div class="card-title">Live challenge</div>
-              <div class="card-subtitle">A random beginner challenge with extra XP boost.</div>
-            </div>
-            <span class="badge-soft">Surprise mode</span>
-          </div>
-          <p style="font-size:13px;color:#9ca3af;">
-            Press “New random challenge” to load one of your unlocked lessons into the editor, then solve it for a bonus.
-          </p>
-          <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap;">
-            <button class="btn-small primary" id="btnRandomChallenge">New random challenge</button>
-            <button class="btn-small" id="btnOpenEditorTab">Jump to editor</button>
-          </div>
-        </div>
-      </section>
-
-      <section class="app-content hidden" id="screenRewards">
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <div class="card-title">Rewards shop</div>
-              <div class="card-subtitle">Spend your coins on fun cosmetic rewards.</div>
-            </div>
-            <span class="badge gold">Wallet: <span id="rewardsCoins">0</span> coins</span>
-          </div>
-          <div class="reward-grid" id="rewardGrid"></div>
-        </div>
-      </section>
-
-      <section class="app-content hidden" id="screenHistory">
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <div class="card-title">Code history</div>
-              <div class="card-subtitle">Your recent runs, results and XP gains – like a transactions list for your learning.</div>
-            </div>
-            <span class="badge-soft" id="historyCountBadge">0 attempts</span>
-          </div>
           <div class="stats-row">
             <div class="stat-card">
-              <div class="stat-label">Lessons completed</div>
-              <div class="stat-value" id="statLessons">0</div>
-              <div class="stat-trend" id="statLessonsTrend">+0 today</div>
+              <div class="stat-label">Total lessons started</div>
+              <div class="stat-value" id="historyLessonsTotal">0</div>
+              <div class="stat-trend" id="historyLessonsTrend">No history yet.</div>
             </div>
             <div class="stat-card">
-              <div class="stat-label">Total XP</div>
-              <div class="stat-value" id="statXP">0</div>
-              <div class="stat-trend" id="statXPTrend">Level 1</div>
+              <div class="stat-label">Total XP earned</div>
+              <div class="stat-value" id="historyXPTotal">0</div>
+              <div class="stat-trend" id="historyXPTrend">Level 1</div>
             </div>
             <div class="stat-card">
-              <div class="stat-label">Total runs</div>
-              <div class="stat-value" id="statRuns">0</div>
-              <div class="stat-trend" id="statRunsTrend">Keep experimenting</div>
+              <div class="stat-label">Total questions answered</div>
+              <div class="stat-value" id="historyQuestionsTotal">0</div>
+              <div class="stat-trend" id="historyQuestionsTrend">Keep going.</div>
             </div>
           </div>
-          <div style="margin-top:10px;max-height:260px;overflow:auto;border-radius:12px;border:1px solid rgba(31,41,55,0.96);">
+
+          <div class="history-table-wrapper">
             <table class="history-table" id="historyTable">
               <thead>
                 <tr>
                   <th>Lesson</th>
-                  <th>Outcome</th>
+                  <th>Result</th>
                   <th>XP</th>
                   <th>Coins</th>
+                  <th>Questions</th>
                   <th>When</th>
                 </tr>
               </thead>
@@ -2058,720 +1214,683 @@
             </table>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="app-content hidden" id="screenProfile">
+    <!-- FEED SCREEN -->
+    <section class="main-content screen" id="screen-feed">
+      <div class="content-inner">
+        <h2 class="section-title">Feedback & activity feed</h2>
+        <p class="section-subtitle">
+          A mock “everyone’s talking” feed, showing how other learners might react to your progress. [web:36][web:39]
+        </p>
+
+        <div class="grid-two">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-main">
+                <div class="card-title">Feed</div>
+                <div class="card-subtitle">
+                  These are simulated messages based on your lesson history.
+                </div>
+              </div>
+              <span class="badge-soft">Demo community</span>
+            </div>
+
+            <div class="feed-list" id="feedList"></div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-main">
+                <div class="card-title">Your search & lesson memory</div>
+                <div class="card-subtitle">
+                  Last few topics you searched for and opened.
+                </div>
+              </div>
+              <span class="badge-soft">Local to this browser</span>
+            </div>
+
+            <div class="article">
+              <h3>Recent search topics</h3>
+              <p id="recentSearches">You haven’t searched for anything yet.</p>
+              <h3 style="margin-top:8px;">Recently opened lessons</h3>
+              <p id="recentLessons">Start a lesson from the Lessons tab to see it here.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROFILE SCREEN -->
+    <section class="main-content screen" id="screen-profile">
+      <div class="content-inner">
+        <h2 class="section-title">Your profile</h2>
+        <p class="section-subtitle">
+          Your profile name is functional, and we show a mock verification to make it feel like a real account. [web:39]
+        </p>
+
         <div class="card">
           <div class="card-header">
-            <div>
-              <div class="card-title">Profile</div>
-              <div class="card-subtitle">Your CodeSprout identity, badges, and learning style.</div>
+            <div class="card-header-main">
+              <div class="card-title">Profile & verification</div>
+              <div class="card-subtitle">
+                Change your display name, see your level, badges, and verification message.
+              </div>
             </div>
-            <span class="badge-soft">Local browser profile</span>
+            <span class="badge-soft green" id="profileLevelBadge">Level 1 · 0 XP</span>
           </div>
+
           <div class="profile-layout">
             <div class="profile-main">
               <img id="profileAvatar" src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=200" alt="">
               <div class="profile-meta">
-                <strong id="profileName">Learner</strong>
-                <span id="profileLevel">Level 1 · 0 XP</span>
-                <div class="profile-badges" id="profileBadges"></div>
+                <strong id="profileName">Guest</strong>
+                <span id="profileSubline">Learner · Level 1</span>
+                <div class="profile-badges" id="profileBadges">
+                  <span class="profile-badge">No badges yet – finish Lesson 1 to get your first badge.</span>
+                </div>
               </div>
             </div>
             <div class="profile-side">
-              <div>Tips for you:</div>
-              <ul>
-                <li>Use comments in your JavaScript to explain what each line does.</li>
-                <li>Experiment – change numbers and text, then run again to see what happens.</li>
-                <li>Try to predict the output before you hit “Run”.</li>
-                <li>Come back tomorrow to extend your streak.</li>
+              <div style="margin-bottom:4px;">Update your display name</div>
+              <div style="display:flex;gap:6px;margin-bottom:8px;">
+                <input id="profileNameInput" placeholder="Enter a new display name" style="flex:1;border-radius:999px;border:1px solid var(--border);padding:6px 10px;background:#020617;color:#e5e7eb;font-size:13px;">
+                <button class="btn-small primary" id="btnSaveProfileName">Save</button>
+              </div>
+              <div class="verification-banner" id="verificationBanner">
+                <div class="verification-icon">✔</div>
+                <div>
+                  <strong>Profile created</strong><br>
+                  <span id="verificationText">This is a mock verification: your learning profile is now active in this browser.</span>
+                </div>
+              </div>
+              <ul style="margin-top:8px;">
+                <li>We don’t send emails – all verification is simulated here.</li>
+                <li>Your progress, coins and history live in your browser’s local storage.</li>
+                <li>You can clear data any time by clearing browser storage.</li>
               </ul>
             </div>
           </div>
         </div>
-      </section>
 
-    </main>
-  </div>
+      </div>
+    </section>
 
+  </main>
+
+  <!-- Toast -->
   <div class="toast hidden" id="toast">
     <div class="toast-icon">✓</div>
-    <div class="toast-content">
-      <strong id="toastTitle">Saved</strong>
-      <div id="toastMessage">Your progress has been updated.</div>
+    <div>
+      <strong id="toastTitle">Saved</strong><br>
+      <span id="toastMessage">Your changes have been saved.</span>
     </div>
     <button class="toast-close" id="toastClose">×</button>
   </div>
 
-  <script>
-    const LS_KEY_USERS = "codesprout_users_v1";
-    const LS_KEY_SESSION = "codesprout_session_v1";
-    const LS_KEY_HISTORY = "codesprout_history_v1";
+</div>
 
-    const authView = document.getElementById("authView");
-    const appView = document.getElementById("appView");
-    const chipSignup = document.getElementById("chipSignup");
-    const chipLogin = document.getElementById("chipLogin");
-    const authTitle = document.getElementById("authTitle");
-    const authSubtitle = document.getElementById("authSubtitle");
-    const authUsername = document.getElementById("authUsername");
-    const authPassword = document.getElementById("authPassword");
-    const authPrimaryBtn = document.getElementById("authPrimaryBtn");
-    const authPrimaryLabel = document.getElementById("authPrimaryLabel");
-    const authSecondaryBtn = document.getElementById("authSecondaryBtn");
-    const authLearnMore = document.getElementById("authLearnMore");
+<script>
+  const LS_PROFILE = "codestay_profile_v1";
+  const LS_HISTORY = "codestay_history_v1";
+  const LS_SEARCHES = "codestay_searches_v1";
 
-    const sidebar = document.getElementById("sidebar");
-    const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+  const exampleLessons = [
+    {
+      id: "hello-console",
+      title: "Print your first message",
+      topic: "console, basics, hello world",
+      minutes: 3,
+      xp: 20,
+      coins: 10,
+      difficulty: "Beginner",
+      thumbnail: "https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=400",
+      article: "You’ll open the browser console and write one line of JavaScript. This is your first conversation with the computer.",
+      questions: 3
+    },
+    {
+      id: "click-button",
+      title: "Change text with a button",
+      topic: "dom, buttons, events",
+      minutes: 4,
+      xp: 25,
+      coins: 12,
+      difficulty: "Beginner",
+      thumbnail: "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=400",
+      article: "You will connect a button to a paragraph and update the text when the button is clicked.",
+      questions: 4
+    },
+    {
+      id: "variables-story",
+      title: "Store your name in a variable",
+      topic: "variables, strings",
+      minutes: 3,
+      xp: 25,
+      coins: 10,
+      difficulty: "Beginner",
+      thumbnail: "https://images.pexels.com/photos/590016/pexels-photo-590016.jpeg?auto=compress&cs=tinysrgb&w=400",
+      article: "You create a variable for your name, then build a personalised greeting on the page.",
+      questions: 3
+    },
+    {
+      id: "loops-stars",
+      title: "Draw a line of stars with a loop",
+      topic: "loops, for, patterns",
+      minutes: 5,
+      xp: 30,
+      coins: 14,
+      difficulty: "Beginner",
+      thumbnail: "https://images.pexels.com/photos/965157/pexels-photo-965157.jpeg?auto=compress&cs=tinysrgb&w=400",
+      article: "You’ll use a for loop to draw a simple row of stars – a first taste of repetition.",
+      questions: 4
+    }
+  ];
 
-    const navItems = Array.from(document.querySelectorAll(".nav-item"));
-    const screens = {
-      home: document.getElementById("screenHome"),
-      lessons: document.getElementById("screenLessons"),
-      challenge: document.getElementById("screenChallenge"),
-      rewards: document.getElementById("screenRewards"),
-      history: document.getElementById("screenHistory"),
-      profile: document.getElementById("screenProfile")
+  const tabs = Array.from(document.querySelectorAll(".tab"));
+  const screens = {
+    home: document.getElementById("screen-home"),
+    lessons: document.getElementById("screen-lessons"),
+    history: document.getElementById("screen-history"),
+    feed: document.getElementById("screen-feed"),
+    profile: document.getElementById("screen-profile")
+  };
+
+  const heroStart = document.getElementById("btnHeroStart");
+  const heroQuick = document.getElementById("btnHeroQuick");
+  const btnHomeStartLesson = document.getElementById("btnHomeStartLesson");
+
+  const summaryLevelBadge = document.getElementById("summaryLevelBadge");
+  const summaryLessons = document.getElementById("summaryLessons");
+  const summaryLessonsTrend = document.getElementById("summaryLessonsTrend");
+  const summaryQuestions = document.getElementById("summaryQuestions");
+  const summaryQuestionsTrend = document.getElementById("summaryQuestionsTrend");
+  const summaryCoins = document.getElementById("summaryCoins");
+  const summaryCoinsTrend = document.getElementById("summaryCoinsTrend");
+
+  const lessonCountBadge = document.getElementById("lessonCountBadge");
+  const lessonFeed = document.getElementById("lessonFeed");
+  const lessonSearchInput = document.getElementById("lessonSearchInput");
+  const searchHint = document.getElementById("searchHint");
+  const lessonDetailTitle = document.getElementById("lessonDetailTitle");
+  const lessonDetailSubtitle = document.getElementById("lessonDetailSubtitle");
+  const lessonDetailBadge = document.getElementById("lessonDetailBadge");
+  const lessonDetailBody = document.getElementById("lessonDetailBody");
+  const lessonDetailQuick = document.getElementById("lessonDetailQuick");
+  const lessonDetailQuickTitle = document.getElementById("lessonDetailQuickTitle");
+  const lessonDetailQuickMeta = document.getElementById("lessonDetailQuickMeta");
+  const lessonDetailQuickText = document.getElementById("lessonDetailQuickText");
+  const btnStartSelectedLesson = document.getElementById("btnStartSelectedLesson");
+
+  const historyBadge = document.getElementById("historyBadge");
+  const historyLessonsTotal = document.getElementById("historyLessonsTotal");
+  const historyLessonsTrend = document.getElementById("historyLessonsTrend");
+  const historyXPTotal = document.getElementById("historyXPTotal");
+  const historyXPTrend = document.getElementById("historyXPTrend");
+  const historyQuestionsTotal = document.getElementById("historyQuestionsTotal");
+  const historyQuestionsTrend = document.getElementById("historyQuestionsTrend");
+  const historyBody = document.getElementById("historyBody");
+
+  const feedList = document.getElementById("feedList");
+  const recentSearchesEl = document.getElementById("recentSearches");
+  const recentLessonsEl = document.getElementById("recentLessons");
+
+  const profileLevelBadge = document.getElementById("profileLevelBadge");
+  const profileNameEl = document.getElementById("profileName");
+  const profileSubline = document.getElementById("profileSubline");
+  const profileBadges = document.getElementById("profileBadges");
+  const profileNameInput = document.getElementById("profileNameInput");
+  const btnSaveProfileName = document.getElementById("btnSaveProfileName");
+  const verificationText = document.getElementById("verificationText");
+
+  const toast = document.getElementById("toast");
+  const toastTitle = document.getElementById("toastTitle");
+  const toastMessage = document.getElementById("toastMessage");
+  const toastClose = document.getElementById("toastClose");
+
+  let currentLessonId = null;
+
+  function getProfile() {
+    try {
+      const stored = localStorage.getItem(LS_PROFILE);
+      if (stored) return JSON.parse(stored);
+    } catch (e) {}
+    return {
+      name: "Guest",
+      xp: 0,
+      coins: 0,
+      questionsAnswered: 0,
+      lessonsCompleted: 0,
+      badges: [],
+      recentLessons: []
     };
+  }
 
-    const sidebarUsername = document.getElementById("sidebarUsername");
-    const sidebarRole = document.getElementById("sidebarRole");
-    const topbarGreeting = document.getElementById("topbarGreeting");
-    const topbarUsername = document.getElementById("topbarUsername");
-    const topbarSubtitle = document.getElementById("topbarSubtitle");
-    const chipLevel = document.getElementById("chipLevel");
-    const chipXP = document.getElementById("chipXP");
-    const chipCoins = document.getElementById("chipCoins");
-    const navXP = document.getElementById("navXP");
-    const navLessons = document.getElementById("navLessons");
-    const navCoins = document.getElementById("navCoins");
-    const badgeStreak = document.getElementById("badgeStreak");
-    const lessonsSummary = document.getElementById("lessonsSummary");
-    const lessonsSummary2 = document.getElementById("lessonsSummary2");
-    const overallProgressFill = document.getElementById("overallProgressFill");
-    const overallProgressLabel = document.getElementById("overallProgressLabel");
-    const overallProgressXP = document.getElementById("overallProgressXP");
-    const lessonListHome = document.getElementById("lessonListHome");
-    const lessonListFull = document.getElementById("lessonListFull");
-    const activeLessonTitleSub = document.getElementById("activeLessonTitleSub");
-    const activeLessonBadge = document.getElementById("activeLessonBadge");
-    const editorTabs = Array.from(document.querySelectorAll(".editor-tab"));
-    const editorTextarea = document.getElementById("editorTextarea");
-    const editorFilename = document.getElementById("editorFilename");
-    const editorStatus = document.getElementById("editorStatus");
-    const outputInner = document.getElementById("outputInner");
-    const outputStatus = document.getElementById("outputStatus");
-    const btnRunCode = document.getElementById("btnRunCode");
-    const btnResetCode = document.getElementById("btnResetCode");
-    const runCounter = document.getElementById("runCounter");
-    const challengeXP = document.getElementById("challengeXP");
-    const challengeCoins = document.getElementById("challengeCoins");
-    const challengeStatusBadge = document.getElementById("challengeStatusBadge");
-    const btnShowHint = document.getElementById("btnShowHint");
-    const btnShowSolution = document.getElementById("btnShowSolution");
-    const hintBox = document.getElementById("hintBox");
-    const solutionBox = document.getElementById("solutionBox");
-    const hintText = document.getElementById("hintText");
-    const solutionText = document.getElementById("solutionText");
-    const btnContinueLesson = document.getElementById("btnContinueLesson");
-    const btnStartBeginner = document.getElementById("btnStartBeginner");
-    const btnRandomChallenge = document.getElementById("btnRandomChallenge");
-    const btnOpenEditorTab = document.getElementById("btnOpenEditorTab");
-    const rewardsCoins = document.getElementById("rewardsCoins");
-    const rewardGrid = document.getElementById("rewardGrid");
-    const historyCountBadge = document.getElementById("historyCountBadge");
-    const historyBody = document.getElementById("historyBody");
-    const statLessons = document.getElementById("statLessons");
-    const statLessonsTrend = document.getElementById("statLessonsTrend");
-    const statXP = document.getElementById("statXP");
-    const statXPTrend = document.getElementById("statXPTrend");
-    const statRuns = document.getElementById("statRuns");
-    const statRunsTrend = document.getElementById("statRunsTrend");
-    const profileName = document.getElementById("profileName");
-    const profileLevel = document.getElementById("profileLevel");
-    const profileBadges = document.getElementById("profileBadges");
-    const logoutBtn = document.getElementById("logoutBtn");
-    const navCoinsSpan = document.getElementById("navCoins");
-    const navLessonsSpan = document.getElementById("navLessons");
-    const profileAvatar = document.getElementById("profileAvatar");
-    const sidebarAvatar = document.getElementById("sidebarAvatar");
+  function saveProfile(profile) {
+    localStorage.setItem(LS_PROFILE, JSON.stringify(profile));
+  }
 
-    const toast = document.getElementById("toast");
-    const toastTitle = document.getElementById("toastTitle");
-    const toastMessage = document.getElementById("toastMessage");
-    const toastClose = document.getElementById("toastClose");
+  function getHistory() {
+    try {
+      const stored = localStorage.getItem(LS_HISTORY);
+      if (stored) return JSON.parse(stored);
+    } catch (e) {}
+    return [];
+  }
 
-    const state = {
-      currentUser: null,
-      currentLessonId: null,
-      currentLang: "html",
-      runCount: 0,
-      rewards: [
-        { id: "badge_night", name: "Night Owl Badge", cost: 50, desc: "Unlocked by coding after dark.", owned: false },
-        { id: "badge_streak", name: "Streak Flame", cost: 40, desc: "Shows off your multi‑day streak.", owned: false },
-        { id: "theme_matrix", name: "Matrix Code Theme", cost: 60, desc: "Green neon rain background.", owned: false },
-        { id: "title_hacker", name: "“Playful Hacker” title", cost: 30, desc: "Appears under your name.", owned: false },
-        { id: "badge_variables", name: "Variables Wizard", cost: 20, desc: "Awarded when you master variables.", owned: false },
-        { id: "badge_loops", name: "Loop Explorer", cost: 25, desc: "Awarded when you use loops.", owned: false }
-      ],
-      lessons: [
-        {
-          id: "hello-console",
-          title: "Print your first message",
-          difficulty: "Beginner",
-          xp: 20,
-          coins: 10,
-          minutes: 3,
-          locked: false,
-          completed: false,
-          description: "Use console.log to print your first message in JavaScript.",
-          starter: {
-            html: "<h1>Open your DevTools console</h1>\n<p>Then run your JavaScript code to print a message.</p>",
-            css: "body { font-family: system-ui; padding: 16px; background: #0f172a; color: #e5e7eb; }\n h1 { color: #22c55e; }",
-            js: "// TODO: use console.log to print 'Hello, CodeSprout!'\n\n"
-          },
-          hint: "Type console.log('Hello, CodeSprout!'); in the JavaScript panel, then run your code.",
-          solution: "console.log('Hello, CodeSprout!');",
-          test: function (html, css, js) {
-            return js.replace(/\s/g, '').includes("console.log('Hello,CodeSprout!');") ||
-                   js.replace(/\s/g, '').includes('console.log("Hello,CodeSprout!");');
-          }
-        },
-        {
-          id: "change-text",
-          title: "Change text on button click",
-          difficulty: "Beginner",
-          xp: 25,
-          coins: 12,
-          minutes: 4,
-          locked: true,
-          completed: false,
-          description: "Make a button that changes the paragraph text when clicked.",
-          starter: {
-            html: "<h1>Click the button</h1>\n<p id=\"message\">Nothing yet…</p>\n<button id=\"magicBtn\">Change text</button>",
-            css: "body { font-family: system-ui; padding: 16px; background: #020617; color:#e5e7eb; }\nbutton{padding:8px 12px;border-radius:999px;border:none;background:#22c55e;color:#020617;cursor:pointer;}",
-            js: "// TODO: When the button is clicked, change the paragraph text to \"You clicked the button!\".\n\n"
-          },
-          hint: "Use document.getElementById('magicBtn') and addEventListener('click', ...), then update message.textContent.",
-          solution: "const btn = document.getElementById('magicBtn');\nconst msg = document.getElementById('message');\nbtn.addEventListener('click', () => {\n  msg.textContent = 'You clicked the button!';\n});",
-          test: function (html, css, js) {
-            return js.includes("getElementById") && js.includes("addEventListener") && js.includes("textContent");
-          }
-        },
-        {
-          id: "variables",
-          title: "Store your name in a variable",
-          difficulty: "Beginner",
-          xp: 25,
-          coins: 10,
-          minutes: 3,
-          locked: true,
-          completed: false,
-          description: "Create a variable for a name and show it on the page.",
-          starter: {
-            html: "<h1>Welcome!</h1>\n<p id=\"greeting\"></p>",
-            css: "body{font-family:system-ui;background:#020617;color:#e5e7eb;padding:16px;}",
-            js: "// TODO: create a variable called userName and set it to your name.\n// Then set greeting.textContent to \"Hello, \" + userName.\n\n"
-          },
-          hint: "Use const userName = 'Your Name'; then document.getElementById and textContent to display it.",
-          solution: "const userName = 'Ada';\nconst greeting = document.getElementById('greeting');\ngreeting.textContent = 'Hello, ' + userName;",
-          test: function (html, css, js) {
-            return js.includes("userName") && js.includes("greeting") && js.includes("textContent");
-          }
-        },
-        {
-          id: "loop-stars",
-          title: "Create a line of stars with a loop",
-          difficulty: "Beginner",
-          xp: 30,
-          coins: 14,
-          minutes: 5,
-          locked: true,
-          completed: false,
-          description: "Use a for loop to create ***** and show it in the browser.",
-          starter: {
-            html: "<h1>Stars</h1>\n<pre id=\"stars\"></pre>",
-            css: "body{font-family:system-ui;background:#020617;color:#e5e7eb;padding:16px;}\npre{font-size:24px;}",
-            js: "// TODO: build a string with 5 stars using a loop, then set starsEl.textContent.\n\n"
-          },
-          hint: "Start with let stars = ''; then loop from 0 to 4 and add '*' each time.",
-          solution: "let stars = '';\nfor (let i = 0; i < 5; i++) {\n  stars += '*';\n}\nconst starsEl = document.getElementById('stars');\nstarsEl.textContent = stars;",
-          test: function (html, css, js) {
-            return js.includes("for") && js.includes("stars") && js.includes("textContent");
-          }
-        },
-        {
-          id: "if-else",
-          title: "Check if a number is big",
-          difficulty: "Beginner",
-          xp: 30,
-          coins: 14,
-          minutes: 5,
-          locked: true,
-          completed: false,
-          description: "Ask for a number and show if it’s greater than 10.",
-          starter: {
-            html: "<h1>Is it big?</h1>\n<input id=\"numberInput\" type=\"number\" placeholder=\"Type a number\" />\n<button id=\"checkBtn\">Check</button>\n<p id=\"result\"></p>",
-            css: "body{font-family:system-ui;background:#020617;color:#e5e7eb;padding:16px;}\ninput,button{margin-top:8px;padding:6px 10px;border-radius:999px;border:none;}button{background:#22c55e;color:#020617;cursor:pointer;}",
-            js: "// TODO: when the button is clicked, read the number and check if it’s > 10.\n// Show a different message in result for big vs small numbers.\n\n"
-          },
-          hint: "Use parseInt(numberInput.value, 10) and an if (...) { ... } else { ... } block.",
-          solution: "const input = document.getElementById('numberInput');\nconst btn = document.getElementById('checkBtn');\nconst result = document.getElementById('result');\nbtn.addEventListener('click', () => {\n  const value = parseInt(input.value, 10);\n  if (value > 10) {\n    result.textContent = 'That is a big number!';\n  } else {\n    result.textContent = 'That is not so big.';\n  }\n});",
-          test: function (html, css, js) {
-            return js.includes("if") && js.includes("else") && js.includes("addEventListener");
-          }
-        },
-        {
-          id: "array-list",
-          title: "Show a list of favorite foods",
-          difficulty: "Beginner",
-          xp: 35,
-          coins: 16,
-          minutes: 6,
-          locked: true,
-          completed: false,
-          description: "Use an array and a loop to show a list of items.",
-          starter: {
-            html: "<h1>Favorite foods</h1>\n<ul id=\"foodList\"></ul>",
-            css: "body{font-family:system-ui;background:#020617;color:#e5e7eb;padding:16px;}\nli{margin-bottom:4px;}",
-            js: "// TODO: create an array of at least 3 foods.\n// For each one, create an li element and append it to foodList.\n\n"
-          },
-          hint: "Use const foods = ['Pizza', 'Burger', ...]; then forEach to append li elements.",
-          solution: "const foods = ['Pizza', 'Burger', 'Pasta'];\nconst list = document.getElementById('foodList');\nfoods.forEach(food => {\n  const li = document.createElement('li');\n  li.textContent = food;\n  list.appendChild(li);\n});",
-          test: function (html, css, js) {
-            return js.includes("foods") && js.includes("forEach") && js.includes("createElement");
-          }
-        }
-      ]
-    };
+  function saveHistory(history) {
+    localStorage.setItem(LS_HISTORY, JSON.stringify(history));
+  }
 
-    function getUsers() {
-      try {
-        return JSON.parse(localStorage.getItem(LS_KEY_USERS)) || {};
-      } catch (e) {
-        return {};
-      }
-    }
+  function getSearches() {
+    try {
+      const stored = localStorage.getItem(LS_SEARCHES);
+      if (stored) return JSON.parse(stored);
+    } catch (e) {}
+    return [];
+  }
 
-    function saveUsers(users) {
-      localStorage.setItem(LS_KEY_USERS, JSON.stringify(users));
-    }
+  function saveSearches(searches) {
+    localStorage.setItem(LS_SEARCHES, JSON.stringify(searches.slice(-5)));
+  }
 
-    function getSession() {
-      try {
-        return JSON.parse(localStorage.getItem(LS_KEY_SESSION)) || null;
-      } catch (e) {
-        return null;
-      }
-    }
+  function computeLevel(xp) {
+    const level = Math.max(1, Math.floor(xp / 100) + 1);
+    const currentLevelXP = (level - 1) * 100;
+    const nextLevelXP = level * 100;
+    const xpInLevel = xp - currentLevelXP;
+    const xpToNext = nextLevelXP - currentLevelXP;
+    return { level, xpInLevel, xpToNext };
+  }
 
-    function saveSession(session) {
-      if (session) {
-        localStorage.setItem(LS_KEY_SESSION, JSON.stringify(session));
-      } else {
-        localStorage.removeItem(LS_KEY_SESSION);
-      }
-    }
+  function showToast(title, msg) {
+    toastTitle.textContent = title;
+    toastMessage.textContent = msg;
+    toast.classList.remove("hidden");
+    if (toast._timer) clearTimeout(toast._timer);
+    toast._timer = setTimeout(() => toast.classList.add("hidden"), 3200);
+  }
 
-    function getHistory() {
-      try {
-        return JSON.parse(localStorage.getItem(LS_KEY_HISTORY)) || {};
-      } catch (e) {
-        return {};
-      }
-    }
+  toastClose.addEventListener("click", () => toast.classList.add("hidden"));
 
-    function saveHistory(history) {
-      localStorage.setItem(LS_KEY_HISTORY, JSON.stringify(history));
-    }
-
-    function ensureProfile(username) {
-      const users = getUsers();
-      if (!users[username]) {
-        users[username] = {
-          password: null,
-          xp: 0,
-          coins: 0,
-          level: 1,
-          streak: 0,
-          lastLoginDate: null,
-          lessons: state.lessons.reduce((acc, lesson) => {
-            acc[lesson.id] = {
-              completed: false,
-              bestXP: 0,
-              lastTouched: null
-            };
-            return acc;
-          }, {}),
-          badges: [],
-          rewardsOwned: []
-        };
-        saveUsers(users);
-      }
-      return users[username];
-    }
-
-    function saveProfile(username, profile) {
-      const users = getUsers();
-      users[username] = {
-        ...users[username],
-        ...profile
-      };
-      saveUsers(users);
-    }
-
-    function computeLevel(xp) {
-      const level = Math.max(1, Math.floor(xp / 100) + 1);
-      const currentLevelXP = (level - 1) * 100;
-      const nextLevelXP = level * 100;
-      const progress = Math.min(100, ((xp - currentLevelXP) / (nextLevelXP - currentLevelXP)) * 100);
-      return { level, progress, currentLevelXP, nextLevelXP };
-    }
-
-    function showToast(title, message) {
-      toastTitle.textContent = title;
-      toastMessage.textContent = message;
-      toast.classList.remove("hidden");
-      if (toast._timer) {
-        clearTimeout(toast._timer);
-      }
-      toast._timer = setTimeout(() => {
-        toast.classList.add("hidden");
-      }, 3500);
-    }
-
-    toastClose.addEventListener("click", () => {
-      toast.classList.add("hidden");
-    });
-
-    function setScreen(screenKey) {
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      const target = tab.dataset.screen;
+      tabs.forEach(t => t.classList.toggle("active", t === tab));
       Object.entries(screens).forEach(([key, el]) => {
-        if (key === screenKey) {
-          el.classList.remove("hidden");
-        } else {
-          el.classList.add("hidden");
-        }
+        el.classList.toggle("active", key === target);
       });
-      navItems.forEach(item => {
-        if (item.dataset.screen === screenKey) {
-          item.classList.add("active");
-        } else {
-          item.classList.remove("active");
-        }
+      if (target === "history") renderHistory();
+      if (target === "feed") renderFeed();
+      if (target === "profile") renderProfile();
+    });
+  });
+
+  heroStart.addEventListener("click", () => {
+    openLessonsTabAndSelect("hello-console");
+  });
+
+  heroQuick.addEventListener("click", () => {
+    openLessonsTabAndSelect("hello-console");
+    showToast("Quick lesson", "We loaded your first quick lesson in the Lessons tab.");
+  });
+
+  btnHomeStartLesson.addEventListener("click", () => {
+    openLessonsTabAndSelect("hello-console");
+  });
+
+  function openLessonsTabAndSelect(lessonId) {
+    tabs.forEach(t => t.classList.toggle("active", t.dataset.screen === "lessons"));
+    Object.entries(screens).forEach(([key, el]) => {
+      el.classList.toggle("active", key === "lessons");
+    });
+    selectLesson(lessonId);
+  }
+
+  function renderLessonsList(filterText = "") {
+    const profile = getProfile();
+    lessonFeed.innerHTML = "";
+    const q = filterText.trim().toLowerCase();
+    const lessons = exampleLessons.filter(lesson => {
+      if (!q) return true;
+      return lesson.title.toLowerCase().includes(q) || lesson.topic.toLowerCase().includes(q);
+    });
+
+    lessons.forEach(lesson => {
+      const card = document.createElement("div");
+      card.className = "lesson-card";
+      card.dataset.lessonId = lesson.id;
+      card.innerHTML = `
+        <div class="lesson-thumb">
+          <img src="${lesson.thumbnail}" alt="">
+        </div>
+        <div class="lesson-body">
+          <div class="lesson-title-row">
+            <div class="lesson-title">${lesson.title}</div>
+            <div class="lesson-meta-tag">${lesson.minutes} min · ${lesson.difficulty}</div>
+          </div>
+          <div class="lesson-meta-row">
+            <span class="lesson-meta-tag">${lesson.xp} XP</span>
+            <span class="lesson-meta-tag">${lesson.coins} coins</span>
+            <span class="lesson-meta-tag">${lesson.questions} questions</span>
+          </div>
+          <div class="lesson-desc">${lesson.article}</div>
+        </div>
+      `;
+      card.addEventListener("click", () => {
+        selectLesson(lesson.id);
       });
+      lessonFeed.appendChild(card);
+    });
+
+    lessonCountBadge.textContent = exampleLessons.length + " lessons available";
+  }
+
+  function selectLesson(id) {
+    const lesson = exampleLessons.find(l => l.id === id);
+    if (!lesson) return;
+    currentLessonId = id;
+    lessonDetailTitle.textContent = lesson.title;
+    lessonDetailSubtitle.textContent = "Topic: " + lesson.topic;
+    lessonDetailBadge.textContent = `${lesson.minutes} min · ${lesson.xp} XP · ${lesson.difficulty}`;
+    lessonDetailBody.innerHTML = `
+      <p>${lesson.article}</p>
+      <h3>Questions you’ll see</h3>
+      <ul class="article-list">
+        <li>Question 1: Read the description and type the correct code snippet.</li>
+        <li>Question 2: Change something and predict the output.</li>
+        <li>Question 3: Fix a small mistake in a broken example.</li>
+      </ul>
+      <p>You don’t have to be perfect on the first try – each attempt still teaches your brain something.</p>
+    `;
+    lessonDetailQuickTitle.textContent = "Start: " + lesson.title;
+    lessonDetailQuickMeta.innerHTML = `
+      <span>${lesson.minutes} minutes</span>
+      <span>${lesson.xp} XP</span>
+      <span>${lesson.coins} coins</span>
+      <span>${lesson.questions} questions</span>
+    `;
+    lessonDetailQuickText.textContent = "When you press start, we’ll add this lesson to your history with a simulated completion result.";
+    btnStartSelectedLesson.disabled = false;
+
+    const searches = getSearches();
+    const titleLower = lesson.title.toLowerCase();
+    if (!searches.includes(titleLower)) {
+      searches.push(titleLower);
+      saveSearches(searches);
     }
 
-    navItems.forEach(item => {
-      item.addEventListener("click", () => {
-        const screen = item.dataset.screen;
-        setScreen(screen);
-      });
-    });
+    renderFeedMemory();
+  }
 
-    mobileMenuBtn.addEventListener("click", () => {
-      sidebar.classList.toggle("open");
-    });
+  btnStartSelectedLesson.addEventListener("click", () => {
+    if (!currentLessonId) return;
+    const lesson = exampleLessons.find(l => l.id === currentLessonId);
+    if (!lesson) return;
+    const profile = getProfile();
+    profile.xp += lesson.xp;
+    profile.coins += lesson.coins;
+    profile.questionsAnswered += lesson.questions;
+    profile.lessonsCompleted += 1;
 
-    sidebar.addEventListener("click", (e) => {
-      if (e.target.closest(".nav-item")) {
-        sidebar.classList.remove("open");
-      }
-    });
-
-    function setAuthMode(mode) {
-      if (mode === "signup") {
-        chipSignup.classList.add("active");
-        chipLogin.classList.remove("active");
-        authTitle.textContent = "Get your free coding profile";
-        authSubtitle.textContent = "Choose a username – we’ll use it to save your lessons, coins and badges in this browser.";
-        authPrimaryLabel.textContent = "Create my profile";
-        authPrimaryBtn.dataset.mode = "signup";
-      } else {
-        chipSignup.classList.remove("active");
-        chipLogin.classList.add("active");
-        authTitle.textContent = "Welcome back";
-        authSubtitle.textContent = "Enter your username and password to continue where you left off.";
-        authPrimaryLabel.textContent = "Sign me in";
-        authPrimaryBtn.dataset.mode = "login";
-      }
+    if (!profile.badges.includes("Lesson Explorer")) {
+      profile.badges.push("Lesson Explorer");
     }
 
-    chipSignup.addEventListener("click", () => setAuthMode("signup"));
-    chipLogin.addEventListener("click", () => setAuthMode("login"));
+    profile.recentLessons = profile.recentLessons || [];
+    profile.recentLessons.push(lesson.title);
+    profile.recentLessons = profile.recentLessons.slice(-5);
 
-    authLearnMore.addEventListener("click", (e) => {
-      e.preventDefault();
-      alert("CodeSprout stores your progress only inside this browser using localStorage. There is no real server or real accounts – it is a learning demo.");
+    saveProfile(profile);
+
+    const history = getHistory();
+    history.push({
+      lessonId: lesson.id,
+      title: lesson.title,
+      xp: lesson.xp,
+      coins: lesson.coins,
+      questions: lesson.questions,
+      result: "Completed",
+      timestamp: new Date().toISOString()
     });
+    saveHistory(history);
 
-    authSecondaryBtn.addEventListener("click", () => {
-      const username = "Guest-" + Math.floor(Math.random() * 10000);
-      const profile = ensureProfile(username);
-      profile.password = null;
-      saveProfile(username, profile);
-      saveSession({ username });
-      state.currentUser = username;
-      enterApp();
-      showToast("Guest session", "You’re now in a temporary guest profile. Create a real username later if you like.");
-    });
+    showToast("Lesson added", `We added "${lesson.title}" to your history and updated your profile.`);
+    renderHomeSummary();
+    renderProfile();
+    renderFeed();
+  });
 
-    authPrimaryBtn.addEventListener("click", () => {
-      const username = authUsername.value.trim();
-      const password = authPassword.value.trim();
-      if (!username || !password || password.length < 4) {
-        alert("Please enter a username and a password of at least 4 characters.");
-        return;
+  lessonSearchInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      const value = lessonSearchInput.value.trim();
+      if (value) {
+        const searches = getSearches();
+        searches.push(value.toLowerCase());
+        saveSearches(searches);
+        searchHint.textContent = "Saved in your recent searches.";
+        renderFeedMemory();
       }
-      const mode = authPrimaryBtn.dataset.mode || "signup";
-      const users = getUsers();
-      if (mode === "signup") {
-        if (users[username] && users[username].password) {
-          alert("This username already exists. Try logging in instead.");
-          return;
-        }
-        const profile = ensureProfile(username);
-        profile.password = password;
-        profile.lastLoginDate = new Date().toISOString().slice(0, 10);
-        saveProfile(username, profile);
-        saveSession({ username });
-        state.currentUser = username;
-        enterApp();
-        showToast("Welcome to CodeSprout", "Profile created. Time to complete your first lesson.");
-      } else {
-        if (!users[username] || !users[username].password) {
-          alert("We couldn’t find this username. Try creating a new profile.");
-          return;
-        }
-        if (users[username].password !== password) {
-          alert("Password doesn’t match. Try again.");
-          return;
-        }
-        const profile = ensureProfile(username);
-        const today = new Date().toISOString().slice(0, 10);
-        if (profile.lastLoginDate && profile.lastLoginDate !== today) {
-          profile.streak = (profile.streak || 0) + 1;
-        } else if (!profile.lastLoginDate) {
-          profile.streak = 1;
-        }
-        profile.lastLoginDate = today;
-        saveProfile(username, profile);
-        saveSession({ username });
-        state.currentUser = username;
-        enterApp();
-        showToast("Welcome back", "Loaded your previous progress and coins.");
-      }
+    }
+  });
+
+  lessonSearchInput.addEventListener("input", () => {
+    renderLessonsList(lessonSearchInput.value);
+    searchHint.textContent = "Press Enter to save this search.";
+  });
+
+  function renderHomeSummary() {
+    const profile = getProfile();
+    const { level, xpInLevel, xpToNext } = computeLevel(profile.xp);
+    summaryLevelBadge.textContent = `Level ${level} · ${profile.xp} XP`;
+    summaryLessons.textContent = profile.lessonsCompleted;
+    summaryLessonsTrend.textContent =
+      profile.lessonsCompleted === 0 ? "Start your first lesson above." : "Nice – keep opening new lessons.";
+    summaryQuestions.textContent = profile.questionsAnswered;
+    summaryQuestionsTrend.textContent =
+      profile.questionsAnswered === 0 ? "No questions answered yet." : "Every question is another step.";
+    summaryCoins.textContent = profile.coins;
+    summaryCoinsTrend.textContent =
+      profile.coins === 0 ? "Coins appear as you complete lessons." : "You can imagine spending coins on themes.";
+
+    const levelLabel = `Level ${level} · ${xpInLevel} / ${xpToNext} XP`;
+    profileLevelBadge.textContent = levelLabel;
+    historyXPTrend.textContent = "Level " + level;
+  }
+
+  function renderHistory() {
+    const history = getHistory();
+    historyBody.innerHTML = "";
+    historyBadge.textContent = history.length + " attempts";
+
+    let totalXP = 0;
+    let totalCoins = 0;
+    let totalQuestions = 0;
+    let lessonIds = new Set();
+
+    history.forEach(entry => {
+      totalXP += entry.xp;
+      totalCoins += entry.coins;
+      totalQuestions += entry.questions;
+      lessonIds.add(entry.lessonId);
+      const tr = document.createElement("tr");
+      const date = new Date(entry.timestamp);
+      tr.innerHTML = `
+        <td>${entry.title}</td>
+        <td>
+          <span class="status-pill success">
+            <span>●</span> ${entry.result}
+          </span>
+        </td>
+        <td>${entry.xp}</td>
+        <td>${entry.coins}</td>
+        <td>${entry.questions}</td>
+        <td>${date.toLocaleString()}</td>
+      `;
+      historyBody.appendChild(tr);
     });
 
-    logoutBtn.addEventListener("click", () => {
-      saveSession(null);
-      state.currentUser = null;
-      authUsername.value = "";
-      authPassword.value = "";
-      authView.style.display = "flex";
-      appView.style.display = "none";
-    });
+    historyLessonsTotal.textContent = lessonIds.size;
+    historyXPTotal.textContent = totalXP;
+    historyQuestionsTotal.textContent = totalQuestions;
 
-    function enterApp() {
-      authView.style.display = "none";
-      appView.style.display = "flex";
-      loadUserData();
-      renderLessons();
-      renderRewards();
-      renderHistory();
-      setScreen("home");
+    historyLessonsTrend.textContent =
+      lessonIds.size === 0 ? "No lessons yet." : "You’ve opened " + lessonIds.size + " unique lessons.";
+    historyQuestionsTrend.textContent =
+      totalQuestions === 0 ? "Try your first questions soon." : totalQuestions + " questions answered so far.";
+  }
+
+  function renderFeed() {
+    const profile = getProfile();
+    const history = getHistory();
+    feedList.innerHTML = "";
+
+    if (history.length === 0) {
+      const card = document.createElement("div");
+      card.className = "feed-card";
+      card.innerHTML = `
+        <div class="feed-avatar">
+          <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=200" alt="">
+        </div>
+        <div class="feed-main">
+          <div class="feed-title">Welcome to CodeStay</div>
+          <div>Start your first lesson and this feed will begin to fill with reactions, like a timeline on a social app.</div>
+          <div class="feed-meta">
+            <span>System message</span>
+            <span>Just now</span>
+          </div>
+        </div>
+      `;
+      feedList.appendChild(card);
+      renderFeedMemory();
+      return;
     }
 
-    function loadUserData() {
-      const session = getSession();
-      if (!session || !session.username) return;
-      const username = session.username;
-      state.currentUser = username;
-      const users = getUsers();
-      const profile = ensureProfile(username);
-      const xp = profile.xp || 0;
-      const coins = profile.coins || 0;
-      const levelInfo = computeLevel(xp);
-      const level = levelInfo.level;
-      const xpInLevel = xp - levelInfo.currentLevelXP;
-      const xpToNext = levelInfo.nextLevelXP - levelInfo.currentLevelXP;
-      const xpLabel = xpInLevel + " / " + xpToNext;
+    const last = history[history.length - 1];
+    const card1 = document.createElement("div");
+    card1.className = "feed-card";
+    card1.innerHTML = `
+      <div class="feed-avatar">
+        <img src="https://images.pexels.com/photos/712970/pexels-photo-712970.jpeg?auto=compress&cs=tinysrgb&w=200" alt="">
+      </div>
+      <div class="feed-main">
+        <div class="feed-title">${profile.name} just completed: ${last.title}</div>
+        <div>
+          “Nice work! ${last.xp} XP and ${last.coins} coins added. That’s how a new coder checks in.”
+        </div>
+        <div class="feed-meta">
+          <span>Community bot</span>
+          <span>${new Date(last.timestamp).toLocaleString()}</span>
+        </div>
+      </div>
+    `;
+    feedList.appendChild(card1);
 
-      sidebarUsername.textContent = username;
-      sidebarRole.textContent = "Learner · Level " + level;
-      topbarGreeting.textContent = "Hi,";
-      topbarUsername.textContent = username;
-      badgeStreak.textContent = (profile.streak || 0) + " days";
-      chipLevel.textContent = level;
-      chipXP.textContent = xpLabel;
-      chipCoins.textContent = coins;
-      navXP.textContent = "Lvl " + level + " · " + xp + " XP";
-      navCoinsSpan.textContent = coins + " coins";
+    const card2 = document.createElement("div");
+    card2.className = "feed-card";
+    card2.innerHTML = `
+      <div class="feed-avatar">
+        <img src="https://images.pexels.com/photos/1181579/pexels-photo-1181579.jpeg?auto=compress&cs=tinysrgb&w=200" alt="">
+      </div>
+      <div class="feed-main">
+        <div class="feed-title">Other learners liked your progress</div>
+        <div>
+          Ayesha and 3 others “hearted” your attempt on <strong>${last.title}</strong>. Keep going to unlock more badges.
+        </div>
+        <div class="feed-meta">
+          <span>Mock feedback</span>
+          <span>Just now</span>
+        </div>
+      </div>
+    `;
+    feedList.appendChild(card2);
 
-      const lessonStatus = profile.lessons || {};
-      let completedCount = 0;
-      state.lessons.forEach(lesson => {
-        const ls = lessonStatus[lesson.id] || {};
-        lesson.completed = !!ls.completed;
-        if (lesson.completed) completedCount++;
-      });
-      const completedPercent = state.lessons.length
-        ? Math.round((completedCount / state.lessons.length) * 100)
-        : 0;
-      lessonsSummary.textContent = completedCount + " / " + state.lessons.length + " completed";
-      lessonsSummary2.textContent = lessonsSummary.textContent;
-      navLessonsSpan.textContent = completedCount + " / " + state.lessons.length + " done";
-      overallProgressFill.style.width = completedPercent + "%";
-      overallProgressLabel.textContent = "You’ve finished " + completedPercent + "% of this track.";
-      overallProgressXP.textContent = xp + " XP earned";
+    if (profile.badges.includes("Lesson Explorer")) {
+      const card3 = document.createElement("div");
+      card3.className = "feed-card";
+      card3.innerHTML = `
+        <div class="feed-avatar">
+          <img src="https://images.pexels.com/photos/3760852/pexels-photo-3760852.jpeg?auto=compress&cs=tinysrgb&w=200" alt="">
+        </div>
+        <div class="feed-main">
+          <div class="feed-title">New badge unlocked: Lesson Explorer</div>
+          <div>
+            This badge appears because you started at least one lesson. Imagine this as a real reward you could show off.
+          </div>
+          <div class="feed-meta">
+            <span>Badge system</span>
+            <span>A moment ago</span>
+          </div>
+        </div>
+      `;
+      feedList.appendChild(card3);
+    }
 
-      profileName.textContent = username;
-      profileLevel.textContent = "Level " + level + " · " + xp + " XP";
+    renderFeedMemory();
+  }
 
-      profileBadges.innerHTML = "";
-      const badges = profile.badges || [];
-      if (!badges.length) {
+  function renderFeedMemory() {
+    const searches = getSearches();
+    const profile = getProfile();
+    if (searches.length === 0) {
+      recentSearchesEl.textContent = "You haven’t searched for anything yet.";
+    } else {
+      recentSearchesEl.textContent = searches.slice(-5).map(s => "“" + s + "”").join(", ");
+    }
+
+    if (!profile.recentLessons || profile.recentLessons.length === 0) {
+      recentLessonsEl.textContent = "Start a lesson from the Lessons tab to see it here.";
+    } else {
+      recentLessonsEl.textContent = profile.recentLessons.slice(-5).join(", ");
+    }
+  }
+
+  function renderProfile() {
+    const profile = getProfile();
+    const { level, xpInLevel, xpToNext } = computeLevel(profile.xp);
+    profileNameEl.textContent = profile.name;
+    profileSubline.textContent = `Learner · Level ${level}`;
+    profileLevelBadge.textContent = `Level ${level} · ${profile.xp} XP`;
+
+    profileBadges.innerHTML = "";
+    if (!profile.badges || profile.badges.length === 0) {
+      profileBadges.innerHTML = '<span class="profile-badge">No badges yet – finish Lesson 1 to get your first badge.</span>';
+    } else {
+      profile.badges.forEach(b => {
         const span = document.createElement("span");
         span.className = "profile-badge";
-        span.textContent = "Complete a few lessons to earn your first badge.";
+        span.textContent = b;
         profileBadges.appendChild(span);
-      } else {
-        badges.forEach(b => {
-          const span = document.createElement("span");
-          span.className = "profile-badge";
-          span.textContent = b;
-          profileBadges.appendChild(span);
-        });
-      }
-    }
-
-    function renderLessons() {
-      lessonListHome.innerHTML = "";
-      lessonListFull.innerHTML = "";
-
-      const session = getSession();
-      if (!session) return;
-      const profile = ensureProfile(session.username);
-      const lessonStatus = profile.lessons || {};
-
-      state.lessons.forEach((lesson, index) => {
-        const status = lessonStatus[lesson.id] || {};
-        const completed = !!status.completed;
-        const locked = lesson.locked && !completed;
-        let dotClass = "lesson-status-dot";
-        if (locked) dotClass += " locked";
-        else if (completed) dotClass += " completed";
-        else dotClass += " current";
-
-        const item = document.createElement("div");
-        item.className = "lesson-item";
-        item.dataset.lessonId = lesson.id;
-        if (state.currentLessonId === lesson.id) {
-          item.classList.add("active");
-        }
-        item.innerHTML = `
-          <div class="${dotClass}"></div>
-          <div class="lesson-main">
-            <strong>${lesson.title}</strong>
-            <span>${lesson.description}</span>
-          </div>
-          <div class="lesson-meta">
-            <span>${lesson.minutes} min</span>
-            <span>${lesson.xp} XP</span>
-            <span>${lesson.coins} 🪙</span>
-            <span class="pill-sm">${locked ? "LOCKED" : completed ? "DONE" : "READY"}</span>
-          </div>
-        `;
-        item.addEventListener("click", () => {
-          if (locked) {
-            alert("This lesson is locked. Complete earlier lessons to unlock it.");
-            return;
-          }
-          loadLessonIntoEditor(lesson.id);
-        });
-        if (index < 3) {
-          lessonListHome.appendChild(item.cloneNode(true));
-        }
-        lessonListFull.appendChild(item);
       });
     }
+    profileNameInput.value = profile.name;
+    verificationText.textContent = "This is a mock verification: your learning profile is now active in this browser.";
+  }
 
-    function getLessonById(id) {
-      return state.lessons.find(l => l.id === id);
+  btnSaveProfileName.addEventListener("click", () => {
+    const name = profileNameInput.value.trim();
+    if (!name) {
+      showToast("Name not saved", "Please enter a non‑empty display name.");
+      return;
     }
+    const profile = getProfile();
+    profile.name = name;
+    saveProfile(profile);
+    renderProfile();
+    renderFeed();
+    showToast("Profile updated", "Your display name has been updated and mock‑verified.");
+  });
 
-    function loadLessonIntoEditor(id) {
-      const lesson = getLessonById(id);
-      if (!lesson) return;
-      state.currentLessonId = id;
-      state.currentLang = "html";
-      state.runCount = 0;
-      editorTabs.forEach(tab => {
-        tab.classList.toggle("active", tab.dataset.lang === "html");
-      });
-      editorFilename.textContent = "index.html";
-      editorTextarea.value = lesson.starter.html;
-      editorStatus.textContent = "Editing HTML for \"" + lesson.title + "\"";
-      outputInner.innerHTML = '<div class="output-placeholder"><strong>Run your code to see it here.</strong><span>We’ll render your HTML, CSS and JavaScript inside a sandboxed iframe.</span></div>';
-      outputStatus.textContent = "Waiting for code…";
-      runCounter.textContent = "Runs: 0";
-      challengeXP.textContent = "+" + lesson.xp + " XP";
-      challengeCoins.textContent = lesson.coins;
-      challengeStatusBadge.textContent = "No attempt yet";
-      challengeStatusBadge.className = "badge";
-      activeLessonTitleSub.textContent = lesson.description;
-      activeLessonBadge.textContent = lesson.title;
-      activeLessonBadge.className = "badge-soft";
-      hintBox.classList.add("hidden");
-      solutionBox.classList.add("hidden");
-      hintText.textContent = lesson.hint;
-      solutionText.textContent = lesson.solution;
-      renderLessons();
-    }
+  function init() {
+    renderLessonsList();
+    renderHomeSummary();
+    renderHistory();
+    renderFeedMemory();
+    renderProfile();
+  }
 
-    editorTabs.forEach(tab => {
-      tab.addEventListener("click", () => {
-        const lang = tab.dataset.lang;
-        state.currentLang = lang;
-        editorTabs.forEach(t => t.classList.toggle("active", t === tab));
-        editorFilename.textContent = lang === "html" ? "index.html" : (lang === "css" ? "styles.css" : "script.js");
-        const lesson = getLessonById(state.currentLessonId);
-        if (!lesson) {
-          editorTextarea.value = "";
-          editorStatus.textContent = "Choose a lesson first.";
-          return;
-        }
-        editorStatus.textContent = "Editing " + editorFilename.textContent + " for \"" + lesson.title + "\"";
-        if (lang === "html") editorTextarea.value = lesson.starter.html;
-        if (lang === "css") editorTextarea.value = lesson.starter.css;
-        if (lang === "js") editorTextarea.value = lesson.starter.js;
-      });
-    });
+  init();
+</script>
 
-    btnResetCode.addEventListener("click", () => {
-      const lesson = getLessonById(state.currentLessonId);
-      if (!lesson) return;
-      const lang = state.currentLang;
-      editorTextarea.value = lesson.starter[lang];
-      editorStatus.textContent = "Starter code restored.";
-    });
-
-    function runCode() {
-      const lesson = getLessonById(state.currentLessonId);
-      const html = (lesson && state.currentLang === "html") ? editorTextarea.value : (lesson ? lesson.starter.html : "");
-      const css = (lesson && state.currentLang === "css") ? editorTextarea.value : (lesson ? lesson.starter.css : "");
-      const js = (lesson && state.currentLang === "js") ? editorTextarea.value : (lesson ? lesson.starter.js : "");
-
-      const doc = `
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8" />
-<style>${css}</style>
-</head>
-<body>
-${html}
-<script>
-try {
-  ${js}
-} catch (e) {
-  document.body.innerHTML += '<pre style="background:#fee2e2;color:#991b1b;padding:8px;border-radius:8px;margin
+</body>
+</html>
