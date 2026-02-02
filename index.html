@@ -1,0 +1,2777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CodeSprout – Learn to Code</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #050816;
+      --bg-alt: #0b1020;
+      --bg-soft: #12172a;
+      --accent: #00c896;
+      --accent-soft: rgba(0, 200, 150, 0.12);
+      --accent-strong: #00f5b8;
+      --danger: #ff4d6a;
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --border: #1f2937;
+      --card-radius: 18px;
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.55);
+    }
+
+    body {
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 40%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      outline: none;
+      font-family: inherit;
+    }
+
+    /* Auth & Landing layout */
+
+    .app-shell {
+      width: 100%;
+      min-height: 100vh;
+      display: none;
+    }
+
+    .auth-shell {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      color: var(--text);
+    }
+
+    .auth-container {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      width: 100%;
+      max-width: 1120px;
+      margin: 24px;
+      border-radius: 32px;
+      overflow: hidden;
+      background: linear-gradient(145deg, #020617 0%, #020617 40%, #020617 100%);
+      box-shadow: 0 26px 80px rgba(0, 0, 0, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.12);
+    }
+
+    .auth-hero {
+      position: relative;
+      padding: 34px 36px;
+      background: radial-gradient(circle at top left, #22c55e 0, #22c55e 8%, transparent 20%) no-repeat,
+                  radial-gradient(circle at top right, #38bdf8 0, #38bdf8 9%, transparent 22%) no-repeat,
+                  radial-gradient(circle at 20% 80%, #eab308 0, #eab308 8%, transparent 28%) no-repeat,
+                  radial-gradient(circle at 80% 90%, #ec4899 0, #ec4899 7%, transparent 24%) no-repeat,
+                  radial-gradient(circle at 50% 40%, #1f2937 0, #020617 52%);
+      background-size: 420px 420px, 360px 360px, 180px 180px, 200px 200px, cover;
+      color: white;
+    }
+
+    .auth-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=1600");
+      background-size: cover;
+      background-position: center;
+      opacity: 0.18;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .auth-hero-inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .auth-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.68);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      backdrop-filter: blur(20px);
+      align-self: flex-start;
+    }
+
+    .auth-logo-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      background: conic-gradient(from 210deg, #22c55e, #22c55e, #38bdf8, #eab308, #ec4899, #22c55e);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #020617;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .auth-logo-text {
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #e5e7eb;
+    }
+
+    .auth-hero-main {
+      margin-top: 40px;
+      max-width: 480px;
+    }
+
+    .auth-hero-kicker {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(226, 232, 240, 0.82);
+      margin-bottom: 10px;
+    }
+
+    .auth-hero-title {
+      font-size: 42px;
+      line-height: 1.1;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+    }
+
+    .auth-hero-title span {
+      background: linear-gradient(135deg, #22c55e, #22c55e, #38bdf8, #a855f7);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .auth-hero-subtitle {
+      margin-top: 18px;
+      font-size: 15px;
+      line-height: 1.6;
+      color: rgba(226, 232, 240, 0.88);
+    }
+
+    .auth-hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      font-size: 12px;
+      color: rgba(226, 232, 240, 0.92);
+    }
+
+    .pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.35);
+    }
+
+    .pill-dot.blue {
+      background: #38bdf8;
+      box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.4);
+    }
+
+    .pill-dot.gold {
+      background: #eab308;
+      box-shadow: 0 0 0 4px rgba(234, 179, 8, 0.35);
+    }
+
+    .auth-hero-bottom {
+      margin-top: auto;
+      padding-top: 26px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+      font-size: 13px;
+      color: rgba(226, 232, 240, 0.82);
+    }
+
+    .auth-avatars {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .avatar-stack {
+      display: inline-flex;
+    }
+
+    .avatar-stack img {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 2px solid #020617;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.75);
+      object-fit: cover;
+      margin-left: -10px;
+    }
+
+    .avatar-stack img:first-child {
+      margin-left: 0;
+    }
+
+    .auth-hero-badge {
+      background: rgba(15, 23, 42, 0.8);
+      border-radius: 999px;
+      padding: 4px 10px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    .auth-hero-badge span {
+      color: #e5e7eb;
+    }
+
+    .auth-hero-badge strong {
+      color: #22c55e;
+      margin-left: 6px;
+    }
+
+    .auth-form-side {
+      background: radial-gradient(circle at top, #0b1020 0, #020617 60%, #000 100%);
+      padding: 32px 30px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .auth-form-card {
+      margin-top: 32px;
+      padding: 22px 20px 22px;
+      border-radius: 24px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(16px);
+    }
+
+    .chip-row {
+      display: inline-flex;
+      padding: 3px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.38);
+      gap: 4px;
+    }
+
+    .chip {
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: rgba(209, 213, 219, 0.88);
+      cursor: pointer;
+      background: transparent;
+    }
+
+    .chip.active {
+      background: linear-gradient(135deg, #22c55e, #14b8a6);
+      color: #020617;
+      font-weight: 600;
+      box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.74);
+    }
+
+    .auth-form-title {
+      margin-top: 18px;
+      font-size: 22px;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .auth-form-subtitle {
+      font-size: 13px;
+      color: #9ca3af;
+      margin-top: 4px;
+    }
+
+    .auth-form-fields {
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 13px;
+    }
+
+    .field label {
+      color: #d1d5db;
+    }
+
+    .field input {
+      background: radial-gradient(circle at top left, #020617 0, #020617 40%, #020617 100%);
+      border-radius: 999px;
+      border: 1px solid #1f2937;
+      padding: 9px 12px;
+      color: #e5e7eb;
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    .field input:focus {
+      border-color: #22c55e;
+      box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.7), 0 0 0 8px rgba(34, 197, 94, 0.15);
+      background: radial-gradient(circle at top left, #020617 0, #020617 50%, #020617 100%);
+    }
+
+    .auth-actions {
+      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn-primary {
+      width: 100%;
+      border-radius: 999px;
+      padding: 9px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #020617;
+      box-shadow: 0 18px 40px rgba(22, 163, 74, 0.7);
+      transition: transform 0.1s, box-shadow 0.1s, filter 0.1s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.04);
+      box-shadow: 0 20px 50px rgba(22, 163, 74, 0.8);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+      box-shadow: 0 12px 28px rgba(22, 163, 74, 0.6);
+    }
+
+    .btn-secondary {
+      width: 100%;
+      border-radius: 999px;
+      padding: 9px 16px;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      border: 1px solid #374151;
+      transition: background 0.15s, border-color 0.15s, transform 0.1s;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(17, 24, 39, 0.96);
+      border-color: #4b5563;
+      transform: translateY(-0.5px);
+    }
+
+    .auth-meta {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #6b7280;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .auth-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .auth-meta span::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #22c55e 0, #16a34a 55%, #15803d 100%);
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.28);
+    }
+
+    .auth-meta a {
+      color: #9ca3af;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+    }
+
+    /* MAIN APP LAYOUT */
+
+    .app-shell {
+      display: flex;
+      background: radial-gradient(circle at top, #111827 0, #020617 50%, #000 100%);
+      color: var(--text);
+    }
+
+    .sidebar {
+      width: 260px;
+      min-height: 100vh;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 1) 0%, #020617 100%);
+      border-right: 1px solid rgba(31, 41, 55, 0.8);
+      padding: 18px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: 20px 0 60px rgba(0, 0, 0, 0.6);
+      z-index: 10;
+    }
+
+    .sidebar-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 8px 10px;
+    }
+
+    .sidebar-brand-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 14px;
+      background: conic-gradient(from 220deg, #22c55e, #22c55e, #38bdf8, #a855f7, #eab308, #22c55e);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #020617;
+      font-weight: 700;
+      font-size: 18px;
+      box-shadow: 0 12px 30px rgba(22, 163, 74, 0.6);
+    }
+
+    .sidebar-title {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .sidebar-title-main {
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .sidebar-title-sub {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .sidebar-menu {
+      margin-top: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .sidebar-section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #6b7280;
+      padding: 0 6px;
+      margin-bottom: 6px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      color: #d1d5db;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: background 0.15s, transform 0.1s, border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .nav-item:hover {
+      background: rgba(31, 41, 55, 0.9);
+      border-color: rgba(148, 163, 184, 0.4);
+      transform: translateY(-0.5px);
+    }
+
+    .nav-item.active {
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.18), rgba(16, 185, 129, 0.12));
+      border-color: rgba(45, 212, 191, 0.7);
+      color: #e5e7eb;
+      box-shadow: 0 16px 40px rgba(20, 184, 166, 0.45);
+    }
+
+    .nav-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(75, 85, 99, 0.8);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+    }
+
+    .nav-item span {
+      flex: 1;
+    }
+
+    .nav-pill {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: #9ca3af;
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      padding-top: 18px;
+      border-top: 1px dashed rgba(55, 65, 81, 0.8);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sidebar-profile-mini {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(75, 85, 99, 0.8);
+    }
+
+    .sidebar-profile-mini img {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      object-fit: cover;
+      border: 2px solid #22c55e;
+    }
+
+    .sidebar-profile-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .sidebar-profile-meta strong {
+      font-size: 13px;
+    }
+
+    .sidebar-profile-meta span {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .sidebar-logout-btn {
+      padding: 6px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      background: rgba(15, 23, 42, 0.85);
+      color: #e5e7eb;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sidebar-logout-btn:hover {
+      background: rgba(30, 64, 175, 0.95);
+      border-color: rgba(129, 140, 248, 0.9);
+    }
+
+    .app-main {
+      flex: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-topbar {
+      padding: 14px 22px;
+      border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.85));
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+
+    .topbar-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .topbar-title {
+      font-size: 17px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .topbar-title span {
+      font-size: 13px;
+      color: #9ca3af;
+      font-weight: 400;
+    }
+
+    .topbar-subtitle {
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chip-soft {
+      font-size: 12px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.9);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #d1d5db;
+    }
+
+    .chip-soft span {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .chip-soft strong {
+      color: #22c55e;
+    }
+
+    .chip-soft.blue strong {
+      color: #38bdf8;
+    }
+
+    .chip-soft.gold strong {
+      color: #eab308;
+    }
+
+    .chip-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .chip-dot.blue {
+      background: #38bdf8;
+    }
+
+    .chip-dot.gold {
+      background: #eab308;
+    }
+
+    .app-content {
+      flex: 1;
+      padding: 18px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .card {
+      border-radius: var(--card-radius);
+      background: radial-gradient(circle at top, #020617 0, #020617 50%, #020617 100%);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      box-shadow: var(--shadow-soft);
+      padding: 14px 14px 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      gap: 10px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .card-subtitle {
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    .badge-soft {
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+      color: #9ca3af;
+    }
+
+    .progress-wrapper {
+      margin-top: 6px;
+    }
+
+    .progress-bar {
+      position: relative;
+      width: 100%;
+      height: 8px;
+      border-radius: 999px;
+      background: #020617;
+      overflow: hidden;
+      border: 1px solid #111827;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #22c55e, #22c55e, #16a34a);
+      box-shadow: 0 0 24px rgba(22, 163, 74, 0.9);
+      transition: width 0.25s ease-out;
+    }
+
+    .progress-label {
+      margin-top: 4px;
+      font-size: 11px;
+      color: #9ca3af;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .pill-tag {
+      padding: 4px 8px;
+      font-size: 11px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      color: #9ca3af;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pill-tag-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .pill-tag-dot.blue {
+      background: #38bdf8;
+    }
+
+    .pill-tag-dot.orange {
+      background: #f97316;
+    }
+
+    .pill-tag-dot.pink {
+      background: #ec4899;
+    }
+
+    .hero-banner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      gap: 16px;
+      align-items: stretch;
+      margin-top: 8px;
+    }
+
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #9ca3af;
+    }
+
+    .hero-headline {
+      font-size: 19px;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-headline span {
+      background: linear-gradient(135deg, #22c55e, #22c55e, #38bdf8);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-body {
+      font-size: 13px;
+      color: #9ca3af;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .btn-small {
+      padding: 7px 12px;
+      font-size: 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(15, 23, 42, 0.95);
+      color: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-small.primary {
+      border-color: rgba(34, 197, 94, 0.8);
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.16), rgba(16, 185, 129, 0.2));
+      box-shadow: 0 14px 26px rgba(16, 185, 129, 0.4);
+    }
+
+    .hero-img {
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: radial-gradient(circle at center, #111827 0, #020617 60%);
+    }
+
+    .hero-img img {
+      width: 100%;
+      height: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      display: block;
+      opacity: 0.92;
+    }
+
+    .hero-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, transparent 0, transparent 55%, rgba(0, 0, 0, 0.9) 100%);
+      pointer-events: none;
+    }
+
+    .hero-img-badge {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      right: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      color: #e5e7eb;
+    }
+
+    .hero-img-badge span {
+      background: rgba(15, 23, 42, 0.85);
+      border-radius: 999px;
+      padding: 4px 9px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+    }
+
+    .hero-img-badge strong {
+      color: #22c55e;
+    }
+
+    .lesson-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 6px;
+      max-height: 280px;
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+
+    .lesson-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 9px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s, border-color 0.15s;
+      font-size: 13px;
+    }
+
+    .lesson-item:hover {
+      background: rgba(31, 41, 55, 0.95);
+      border-color: rgba(148, 163, 184, 0.6);
+      transform: translateY(-1px);
+    }
+
+    .lesson-item.active {
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.16), rgba(16, 185, 129, 0.2));
+      border-color: rgba(34, 197, 94, 0.9);
+      box-shadow: 0 16px 40px rgba(16, 185, 129, 0.5);
+    }
+
+    .lesson-status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #4b5563;
+      box-shadow: 0 0 0 4px rgba(17, 24, 39, 0.92);
+    }
+
+    .lesson-status-dot.completed {
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.3);
+    }
+
+    .lesson-status-dot.locked {
+      background: #6b7280;
+      box-shadow: 0 0 0 4px rgba(55, 65, 81, 0.9);
+    }
+
+    .lesson-status-dot.current {
+      background: #38bdf8;
+      box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.38);
+    }
+
+    .lesson-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .lesson-main strong {
+      font-size: 13px;
+    }
+
+    .lesson-main span {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .lesson-meta {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .lesson-meta span {
+      margin-right: 10px;
+    }
+
+    .lesson-meta .pill-sm {
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid #374151;
+      background: rgba(15, 23, 42, 0.9);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #9ca3af;
+    }
+
+    .editor-card {
+      margin-top: 10px;
+    }
+
+    .editor-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .editor-tab {
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(15, 23, 42, 0.92);
+      color: #9ca3af;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .editor-tab.active {
+      background: radial-gradient(circle at top, rgba(34, 197, 94, 0.3) 0, rgba(16, 185, 129, 0.35) 45%, rgba(15, 23, 42, 0.98) 100%);
+      border-color: rgba(16, 185, 129, 0.9);
+      color: #e5e7eb;
+      box-shadow: 0 16px 40px rgba(16, 185, 129, 0.6);
+    }
+
+    .editor-area-wrapper {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .editor-area {
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(31, 41, 55, 0.96);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .editor-header {
+      padding: 6px 9px;
+      font-size: 11px;
+      color: #9ca3af;
+      border-bottom: 1px solid rgba(31, 41, 55, 0.96);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: radial-gradient(circle at top left, rgba(31, 41, 55, 0.85), rgba(15, 23, 42, 0.96));
+    }
+
+    .editor-header span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .editor-header-dots {
+      display: inline-flex;
+      gap: 4px;
+    }
+
+    .editor-header-dots span {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #ef4444;
+    }
+
+    .editor-header-dots span:nth-child(2) {
+      background: #eab308;
+    }
+
+    .editor-header-dots span:nth-child(3) {
+      background: #22c55e;
+    }
+
+    .editor-textarea {
+      flex: 1;
+      resize: none;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: #e5e7eb;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12px;
+      padding: 10px 11px;
+      line-height: 1.5;
+      tab-size: 2;
+      overflow: auto;
+    }
+
+    .editor-textarea::placeholder {
+      color: #4b5563;
+    }
+
+    .output-frame {
+      flex: 1;
+      background: #020617;
+      border-top: 1px solid rgba(15, 23, 42, 1);
+      position: relative;
+    }
+
+    .output-inner {
+      position: absolute;
+      inset: 0;
+      padding: 8px 10px;
+      overflow: auto;
+      font-family: system-ui, -apple-system, ui-sans-serif;
+      color: #e5e7eb;
+      font-size: 12px;
+    }
+
+    .output-inner iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: white;
+      border-radius: 10px;
+    }
+
+    .output-placeholder {
+      font-size: 12px;
+      color: #6b7280;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .editor-controls {
+      margin-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    .editor-controls-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .editor-controls-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-ghost {
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(15, 23, 42, 0.96);
+      color: #9ca3af;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .btn-ghost.primary {
+      border-color: rgba(34, 197, 94, 0.9);
+      color: #e5e7eb;
+    }
+
+    .badge {
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(15, 23, 42, 0.95);
+      color: #9ca3af;
+    }
+
+    .badge.green {
+      border-color: rgba(34, 197, 94, 0.9);
+      color: #bbf7d0;
+      background: rgba(22, 163, 74, 0.12);
+    }
+
+    .badge.red {
+      border-color: rgba(248, 113, 113, 0.9);
+      color: #fecaca;
+      background: rgba(220, 38, 38, 0.18);
+    }
+
+    .badge.blue {
+      border-color: rgba(56, 189, 248, 0.9);
+      color: #e0f2fe;
+      background: rgba(37, 99, 235, 0.15);
+    }
+
+    .badge.gold {
+      border-color: rgba(234, 179, 8, 0.96);
+      color: #fef3c7;
+      background: rgba(202, 138, 4, 0.18);
+    }
+
+    .hint-area, .solution-area {
+      margin-top: 6px;
+      font-size: 12px;
+      color: #9ca3af;
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: 12px;
+      padding: 6px 8px;
+      border: 1px dashed rgba(55, 65, 81, 0.9);
+    }
+
+    .hint-area strong, .solution-area strong {
+      color: #e5e7eb;
+    }
+
+    .hint-area.hidden, .solution-area.hidden {
+      display: none;
+    }
+
+    .reward-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .reward-card {
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      padding: 8px 9px;
+      font-size: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .reward-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .reward-card-title {
+      font-weight: 500;
+      font-size: 12px;
+    }
+
+    .reward-card-body {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .reward-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .btn-micro {
+      padding: 3px 6px;
+      font-size: 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(2, 6, 23, 0.98);
+      color: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .btn-micro.disabled {
+      opacity: 0.45;
+      cursor: default;
+    }
+
+    .history-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    .history-table th,
+    .history-table td {
+      padding: 6px 8px;
+      border-bottom: 1px solid rgba(31, 41, 55, 0.96);
+    }
+
+    .history-table th {
+      text-align: left;
+      font-weight: 500;
+      color: #9ca3af;
+      background: rgba(15, 23, 42, 0.96);
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    .history-table tbody tr:nth-child(even) {
+      background: rgba(15, 23, 42, 0.92);
+    }
+
+    .history-table tbody tr:nth-child(odd) {
+      background: rgba(15, 23, 42, 0.98);
+    }
+
+    .history-table .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+    }
+
+    .status-pill.success {
+      background: rgba(22, 163, 74, 0.16);
+      color: #bbf7d0;
+    }
+
+    .status-pill.fail {
+      background: rgba(248, 113, 113, 0.18);
+      color: #fecaca;
+    }
+
+    .stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+      font-size: 12px;
+    }
+
+    .stat-card {
+      flex: 1;
+      min-width: 120px;
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(55, 65, 81, 0.95);
+      padding: 8px 9px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .stat-value {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .stat-trend {
+      font-size: 11px;
+      color: #4ade80;
+    }
+
+    .profile-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .profile-main {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .profile-main img {
+      width: 64px;
+      height: 64px;
+      border-radius: 999px;
+      object-fit: cover;
+      border: 2px solid #22c55e;
+      box-shadow: 0 12px 28px rgba(22, 163, 74, 0.6);
+    }
+
+    .profile-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .profile-meta strong {
+      font-size: 16px;
+    }
+
+    .profile-meta span {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    .profile-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .profile-badge {
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      background: rgba(15, 23, 42, 0.96);
+      font-size: 11px;
+    }
+
+    .profile-side {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    .profile-side ul {
+      margin-top: 4px;
+      padding-left: 16px;
+    }
+
+    .profile-side li {
+      margin-bottom: 2px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 960px) {
+      .auth-container {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .auth-hero {
+        display: none;
+      }
+
+      .sidebar {
+        position: fixed;
+        inset: 0 auto 0 0;
+        width: 230px;
+        transform: translateX(-100%);
+        transition: transform 0.22s ease-out;
+        z-index: 30;
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .app-topbar {
+        padding: 10px 14px;
+      }
+
+      .app-content {
+        padding: 12px 12px 16px;
+      }
+
+      .grid,
+      .hero-banner,
+      .editor-area-wrapper,
+      .profile-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .auth-container {
+        margin: 16px;
+      }
+
+      .auth-form-side {
+        padding: 22px 20px;
+      }
+
+      .auth-form-card {
+        padding: 18px 16px;
+      }
+
+      .card {
+        padding: 11px 11px 11px;
+      }
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(15, 23, 42, 0.96);
+      color: #e5e7eb;
+      padding: 6px 9px;
+      font-size: 12px;
+      align-items: center;
+      gap: 6px;
+    }
+
+    @media (max-width: 960px) {
+      .mobile-menu-btn {
+        display: inline-flex;
+      }
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      min-width: 220px;
+      max-width: 320px;
+      border-radius: 14px;
+      padding: 10px 12px;
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid rgba(34, 197, 94, 0.9);
+      color: #e5e7eb;
+      font-size: 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      box-shadow: 0 18px 40px rgba(22, 163, 74, 0.7);
+      z-index: 40;
+    }
+
+    .toast.hidden {
+      display: none;
+    }
+
+    .toast-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #22c55e 0, #15803d 80%);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+    }
+
+    .toast-content strong {
+      font-size: 13px;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .toast-close {
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(15, 23, 42, 0.96);
+      color: #9ca3af;
+      font-size: 11px;
+      padding: 1px 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auth-shell" id="authView">
+    <div class="auth-container">
+      <div class="auth-hero">
+        <div class="auth-hero-inner">
+          <div class="auth-logo">
+            <div class="auth-logo-icon">C</div>
+            <span class="auth-logo-text">Codesprout Studio</span>
+          </div>
+          <div class="auth-hero-main">
+            <div class="auth-hero-kicker">Interactive JavaScript playground</div>
+            <h1 class="auth-hero-title">
+              Learn to code with puzzles that feel like a <span>game</span>.
+            </h1>
+            <p class="auth-hero-subtitle">
+              CodeSprout is a Grasshopper‑style web classroom where you write real JavaScript, get instant feedback, and unlock levels, badges and daily streaks.
+            </p>
+            <div class="auth-hero-pills">
+              <div class="pill">
+                <div class="pill-dot"></div>
+                <span>No installs – runs in your browser.</span>
+              </div>
+              <div class="pill">
+                <div class="pill-dot blue"></div>
+                <span>Short lessons for busy brains.</span>
+              </div>
+              <div class="pill">
+                <div class="pill-dot gold"></div>
+                <span>Earn coins and Grass badges.</span>
+              </div>
+            </div>
+          </div>
+          <div class="auth-hero-bottom">
+            <div class="auth-avatars">
+              <div class="avatar-stack">
+                <img src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=200" alt="">
+                <img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=200" alt="">
+                <img src="https://images.pexels.com/photos/1181715/pexels-photo-1181715.jpeg?auto=compress&cs=tinysrgb&w=200" alt="">
+              </div>
+              <div class="auth-hero-badge">
+                <span>Beginner projects completed</span>
+                <strong>12,431</strong>
+              </div>
+            </div>
+            <div>
+              <div style="font-size:12px;margin-bottom:2px;">“It feels like solving tiny puzzles, not reading a textbook.”</div>
+              <div style="font-size:11px;color:#9ca3af;">– Learner from Lahore</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="auth-form-side">
+        <div style="font-size:11px;color:#9ca3af;text-transform:uppercase;letter-spacing:0.16em;">Welcome</div>
+        <div style="font-size:18px;font-weight:600;">Sign in to start coding</div>
+
+        <div class="auth-form-card">
+          <div class="chip-row">
+            <button class="chip active" id="chipSignup">Create account</button>
+            <button class="chip" id="chipLogin">I already have one</button>
+          </div>
+          <div class="auth-form-title" id="authTitle">Get your free coding profile</div>
+          <div class="auth-form-subtitle" id="authSubtitle">
+            Choose a username – we’ll use it to save your lessons, coins and badges in this browser.
+          </div>
+
+          <div class="auth-form-fields">
+            <div class="field">
+              <label for="authUsername">Username</label>
+              <input id="authUsername" placeholder="e.g. code_ninja" autocomplete="off" />
+            </div>
+            <div class="field">
+              <label for="authPassword">Password</label>
+              <input id="authPassword" type="password" placeholder="At least 4 characters" />
+            </div>
+          </div>
+
+          <div class="auth-actions">
+            <button class="btn-primary" id="authPrimaryBtn">
+              <span id="authPrimaryLabel">Create my profile</span>
+              <span>→</span>
+            </button>
+            <button class="btn-secondary" id="authSecondaryBtn">
+              Try a quick guest session
+            </button>
+          </div>
+
+          <div class="auth-meta">
+            <span>Progress is saved locally on this device.</span>
+            <a href="#" id="authLearnMore">How it works</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-shell" id="appView">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-brand-icon">C</div>
+        <div class="sidebar-title">
+          <div class="sidebar-title-main">CodeSprout</div>
+          <div class="sidebar-title-sub">Grasshopper‑style lab</div>
+        </div>
+      </div>
+
+      <div class="sidebar-menu">
+        <div class="sidebar-section-label">Overview</div>
+        <div class="nav-item active" data-screen="home">
+          <div class="nav-icon">🏠</div>
+          <span>Home</span>
+          <div class="nav-pill" id="navXP">Lvl 1 · 0 XP</div>
+        </div>
+        <div class="nav-item" data-screen="lessons">
+          <div class="nav-icon">📚</div>
+          <span>Lessons</span>
+          <div class="nav-pill" id="navLessons">0 / 6 done</div>
+        </div>
+        <div class="nav-item" data-screen="challenge">
+          <div class="nav-icon">🧩</div>
+          <span>Live challenge</span>
+        </div>
+        <div class="nav-item" data-screen="rewards">
+          <div class="nav-icon">🏅</div>
+          <span>Rewards shop</span>
+          <div class="nav-pill" id="navCoins">0 coins</div>
+        </div>
+        <div class="nav-item" data-screen="history">
+          <div class="nav-icon">📊</div>
+          <span>Code history</span>
+        </div>
+        <div class="nav-item" data-screen="profile">
+          <div class="nav-icon">👤</div>
+          <span>Profile</span>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-profile-mini">
+          <img id="sidebarAvatar" src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=200" alt="">
+          <div class="sidebar-profile-meta">
+            <strong id="sidebarUsername">Learner</strong>
+            <span id="sidebarRole">Beginner · Level 1</span>
+          </div>
+        </div>
+        <button class="sidebar-logout-btn" id="logoutBtn">
+          <span>⟲</span> Switch user
+        </button>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <header class="app-topbar">
+        <div class="topbar-left">
+          <div class="topbar-title">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+              ☰
+            </button>
+            <span id="topbarGreeting">Welcome back</span>
+            <span id="topbarUsername">Coder</span>
+          </div>
+          <div class="topbar-subtitle" id="topbarSubtitle">
+            Pick a lesson, type code in the editor, then press “Run” to see it in action instantly.
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div class="chip-soft">
+            <div class="chip-dot"></div>
+            <span>Level</span>
+            <strong id="chipLevel">1</strong>
+          </div>
+          <div class="chip-soft blue">
+            <div class="chip-dot blue"></div>
+            <span>XP</span>
+            <strong id="chipXP">0 / 100</strong>
+          </div>
+          <div class="chip-soft gold">
+            <div class="chip-dot gold"></div>
+            <span>Coins</span>
+            <strong id="chipCoins">0</strong>
+          </div>
+        </div>
+      </header>
+
+      <section class="app-content" id="screenHome">
+        <div class="grid">
+          <div>
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">Today’s learning path</div>
+                  <div class="card-subtitle">Complete 3 micro‑lessons to keep your streak alive.</div>
+                </div>
+                <span class="badge-soft">Daily streak: <span id="badgeStreak">0 days</span></span>
+              </div>
+              <div class="hero-banner">
+                <div class="hero-copy">
+                  <div class="hero-eyebrow">Grasshopper‑inspired</div>
+                  <div class="hero-headline">
+                    Type real JavaScript, see results in a live <span>playground</span>.
+                  </div>
+                  <div class="hero-body">
+                    Start with “Print your first message”, then move to variables and buttons. The code on the left powers the output on the right.
+                  </div>
+                  <div class="hero-cta-row">
+                    <button class="btn-small primary" id="btnContinueLesson">Continue where I left off →</button>
+                    <button class="btn-small" id="btnStartBeginner">Start at Lesson 1</button>
+                  </div>
+                </div>
+                <div class="hero-img">
+                  <img src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Person coding on laptop">
+                  <div class="hero-img-overlay"></div>
+                  <div class="hero-img-badge">
+                    <span>Live JavaScript preview</span>
+                    <span>XP boost <strong>+20%</strong> for your first 10 runs</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top:12px;">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">Lesson track</div>
+                  <div class="card-subtitle">Work through bite‑sized challenges at your pace.</div>
+                </div>
+                <span class="badge-soft" id="lessonsSummary">0 / 6 completed</span>
+              </div>
+              <div class="progress-wrapper">
+                <div class="progress-bar">
+                  <div class="progress-bar-fill" id="overallProgressFill"></div>
+                </div>
+                <div class="progress-label">
+                  <span id="overallProgressLabel">You’ve finished 0% of this track.</span>
+                  <span id="overallProgressXP">0 XP earned</span>
+                </div>
+              </div>
+              <div class="pill-row">
+                <div class="pill-tag">
+                  <div class="pill-tag-dot"></div>
+                  Beginner JavaScript
+                </div>
+                <div class="pill-tag">
+                  <div class="pill-tag-dot blue"></div>
+                  Hands‑on exercises
+                </div>
+                <div class="pill-tag">
+                  <div class="pill-tag-dot.orange"></div>
+                  Live preview editor
+                </div>
+                <div class="pill-tag">
+                  <div class="pill-tag-dot.pink"></div>
+                  Achievements & coins
+                </div>
+              </div>
+              <div class="lesson-list" id="lessonListHome"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">Active challenge</div>
+                  <div class="card-subtitle" id="activeLessonTitleSub">Pick a lesson to load starter code in the editor.</div>
+                </div>
+                <span class="badge-soft" id="activeLessonBadge">No challenge selected</span>
+              </div>
+              <div class="editor-card">
+                <div class="editor-tabs">
+                  <button class="editor-tab active" data-lang="html">HTML</button>
+                  <button class="editor-tab" data-lang="css">CSS</button>
+                  <button class="editor-tab" data-lang="js">JavaScript</button>
+                </div>
+
+                <div class="editor-area-wrapper">
+                  <div class="editor-area">
+                    <div class="editor-header">
+                      <span>
+                        <div class="editor-header-dots">
+                          <span></span><span></span><span></span>
+                        </div>
+                        <span id="editorFilename">index.html</span>
+                      </span>
+                      <span id="editorStatus">Idle</span>
+                    </div>
+                    <textarea class="editor-textarea" id="editorTextarea" spellcheck="false"></textarea>
+                  </div>
+                  <div class="editor-area">
+                    <div class="editor-header">
+                      <span>
+                        <div class="editor-header-dots">
+                          <span></span><span></span><span></span>
+                        </div>
+                        <span>Output</span>
+                      </span>
+                      <span id="outputStatus">Waiting for code…</span>
+                    </div>
+                    <div class="output-frame">
+                      <div class="output-inner" id="outputInner">
+                        <div class="output-placeholder">
+                          <strong>Run your code to see it here.</strong>
+                          <span>We’ll render your HTML, CSS and JavaScript inside a sandboxed iframe.</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="editor-controls">
+                  <div class="editor-controls-left">
+                    <button class="btn-ghost primary" id="btnRunCode">
+                      ▶ Run code
+                    </button>
+                    <button class="btn-ghost" id="btnResetCode">
+                      ↺ Reset starter code
+                    </button>
+                  </div>
+                  <div class="editor-controls-right">
+                    <span id="runCounter">Runs: 0</span>
+                    <span id="challengeXP" class="badge blue">+0 XP</span>
+                    <span id="challengeStatusBadge" class="badge">No attempt yet</span>
+                  </div>
+                </div>
+
+                <div class="hint-area hidden" id="hintBox">
+                  <strong>Hint:</strong>
+                  <span id="hintText"></span>
+                </div>
+                <div class="solution-area hidden" id="solutionBox">
+                  <strong>Solution snippet:</strong>
+                  <pre id="solutionText" style="margin-top:4px;white-space:pre-wrap;font-family:inherit;"></pre>
+                </div>
+
+                <div class="editor-controls" style="margin-top:6px;">
+                  <div class="editor-controls-left">
+                    <button class="btn-ghost" id="btnShowHint">💡 Reveal hint</button>
+                    <button class="btn-ghost" id="btnShowSolution">✨ Reveal solution</button>
+                  </div>
+                  <div class="editor-controls-right">
+                    <span style="font-size:11px;">Coins reward: <span id="challengeCoins">0</span> 🪙</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="app-content hidden" id="screenLessons">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">All lessons</div>
+              <div class="card-subtitle">Unlock concepts step by step. Completed lessons give you extra coins.</div>
+            </div>
+            <span class="badge-soft" id="lessonsSummary2">0 / 6 completed</span>
+          </div>
+          <div class="lesson-list" id="lessonListFull"></div>
+        </div>
+      </section>
+
+      <section class="app-content hidden" id="screenChallenge">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Live challenge</div>
+              <div class="card-subtitle">A random beginner challenge with extra XP boost.</div>
+            </div>
+            <span class="badge-soft">Surprise mode</span>
+          </div>
+          <p style="font-size:13px;color:#9ca3af;">
+            Press “New random challenge” to load one of your unlocked lessons into the editor, then solve it for a bonus.
+          </p>
+          <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="btn-small primary" id="btnRandomChallenge">New random challenge</button>
+            <button class="btn-small" id="btnOpenEditorTab">Jump to editor</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="app-content hidden" id="screenRewards">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Rewards shop</div>
+              <div class="card-subtitle">Spend your coins on fun cosmetic rewards.</div>
+            </div>
+            <span class="badge gold">Wallet: <span id="rewardsCoins">0</span> coins</span>
+          </div>
+          <div class="reward-grid" id="rewardGrid"></div>
+        </div>
+      </section>
+
+      <section class="app-content hidden" id="screenHistory">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Code history</div>
+              <div class="card-subtitle">Your recent runs, results and XP gains – like a transactions list for your learning.</div>
+            </div>
+            <span class="badge-soft" id="historyCountBadge">0 attempts</span>
+          </div>
+          <div class="stats-row">
+            <div class="stat-card">
+              <div class="stat-label">Lessons completed</div>
+              <div class="stat-value" id="statLessons">0</div>
+              <div class="stat-trend" id="statLessonsTrend">+0 today</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Total XP</div>
+              <div class="stat-value" id="statXP">0</div>
+              <div class="stat-trend" id="statXPTrend">Level 1</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Total runs</div>
+              <div class="stat-value" id="statRuns">0</div>
+              <div class="stat-trend" id="statRunsTrend">Keep experimenting</div>
+            </div>
+          </div>
+          <div style="margin-top:10px;max-height:260px;overflow:auto;border-radius:12px;border:1px solid rgba(31,41,55,0.96);">
+            <table class="history-table" id="historyTable">
+              <thead>
+                <tr>
+                  <th>Lesson</th>
+                  <th>Outcome</th>
+                  <th>XP</th>
+                  <th>Coins</th>
+                  <th>When</th>
+                </tr>
+              </thead>
+              <tbody id="historyBody">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="app-content hidden" id="screenProfile">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Profile</div>
+              <div class="card-subtitle">Your CodeSprout identity, badges, and learning style.</div>
+            </div>
+            <span class="badge-soft">Local browser profile</span>
+          </div>
+          <div class="profile-layout">
+            <div class="profile-main">
+              <img id="profileAvatar" src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=200" alt="">
+              <div class="profile-meta">
+                <strong id="profileName">Learner</strong>
+                <span id="profileLevel">Level 1 · 0 XP</span>
+                <div class="profile-badges" id="profileBadges"></div>
+              </div>
+            </div>
+            <div class="profile-side">
+              <div>Tips for you:</div>
+              <ul>
+                <li>Use comments in your JavaScript to explain what each line does.</li>
+                <li>Experiment – change numbers and text, then run again to see what happens.</li>
+                <li>Try to predict the output before you hit “Run”.</li>
+                <li>Come back tomorrow to extend your streak.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <div class="toast hidden" id="toast">
+    <div class="toast-icon">✓</div>
+    <div class="toast-content">
+      <strong id="toastTitle">Saved</strong>
+      <div id="toastMessage">Your progress has been updated.</div>
+    </div>
+    <button class="toast-close" id="toastClose">×</button>
+  </div>
+
+  <script>
+    const LS_KEY_USERS = "codesprout_users_v1";
+    const LS_KEY_SESSION = "codesprout_session_v1";
+    const LS_KEY_HISTORY = "codesprout_history_v1";
+
+    const authView = document.getElementById("authView");
+    const appView = document.getElementById("appView");
+    const chipSignup = document.getElementById("chipSignup");
+    const chipLogin = document.getElementById("chipLogin");
+    const authTitle = document.getElementById("authTitle");
+    const authSubtitle = document.getElementById("authSubtitle");
+    const authUsername = document.getElementById("authUsername");
+    const authPassword = document.getElementById("authPassword");
+    const authPrimaryBtn = document.getElementById("authPrimaryBtn");
+    const authPrimaryLabel = document.getElementById("authPrimaryLabel");
+    const authSecondaryBtn = document.getElementById("authSecondaryBtn");
+    const authLearnMore = document.getElementById("authLearnMore");
+
+    const sidebar = document.getElementById("sidebar");
+    const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+
+    const navItems = Array.from(document.querySelectorAll(".nav-item"));
+    const screens = {
+      home: document.getElementById("screenHome"),
+      lessons: document.getElementById("screenLessons"),
+      challenge: document.getElementById("screenChallenge"),
+      rewards: document.getElementById("screenRewards"),
+      history: document.getElementById("screenHistory"),
+      profile: document.getElementById("screenProfile")
+    };
+
+    const sidebarUsername = document.getElementById("sidebarUsername");
+    const sidebarRole = document.getElementById("sidebarRole");
+    const topbarGreeting = document.getElementById("topbarGreeting");
+    const topbarUsername = document.getElementById("topbarUsername");
+    const topbarSubtitle = document.getElementById("topbarSubtitle");
+    const chipLevel = document.getElementById("chipLevel");
+    const chipXP = document.getElementById("chipXP");
+    const chipCoins = document.getElementById("chipCoins");
+    const navXP = document.getElementById("navXP");
+    const navLessons = document.getElementById("navLessons");
+    const navCoins = document.getElementById("navCoins");
+    const badgeStreak = document.getElementById("badgeStreak");
+    const lessonsSummary = document.getElementById("lessonsSummary");
+    const lessonsSummary2 = document.getElementById("lessonsSummary2");
+    const overallProgressFill = document.getElementById("overallProgressFill");
+    const overallProgressLabel = document.getElementById("overallProgressLabel");
+    const overallProgressXP = document.getElementById("overallProgressXP");
+    const lessonListHome = document.getElementById("lessonListHome");
+    const lessonListFull = document.getElementById("lessonListFull");
+    const activeLessonTitleSub = document.getElementById("activeLessonTitleSub");
+    const activeLessonBadge = document.getElementById("activeLessonBadge");
+    const editorTabs = Array.from(document.querySelectorAll(".editor-tab"));
+    const editorTextarea = document.getElementById("editorTextarea");
+    const editorFilename = document.getElementById("editorFilename");
+    const editorStatus = document.getElementById("editorStatus");
+    const outputInner = document.getElementById("outputInner");
+    const outputStatus = document.getElementById("outputStatus");
+    const btnRunCode = document.getElementById("btnRunCode");
+    const btnResetCode = document.getElementById("btnResetCode");
+    const runCounter = document.getElementById("runCounter");
+    const challengeXP = document.getElementById("challengeXP");
+    const challengeCoins = document.getElementById("challengeCoins");
+    const challengeStatusBadge = document.getElementById("challengeStatusBadge");
+    const btnShowHint = document.getElementById("btnShowHint");
+    const btnShowSolution = document.getElementById("btnShowSolution");
+    const hintBox = document.getElementById("hintBox");
+    const solutionBox = document.getElementById("solutionBox");
+    const hintText = document.getElementById("hintText");
+    const solutionText = document.getElementById("solutionText");
+    const btnContinueLesson = document.getElementById("btnContinueLesson");
+    const btnStartBeginner = document.getElementById("btnStartBeginner");
+    const btnRandomChallenge = document.getElementById("btnRandomChallenge");
+    const btnOpenEditorTab = document.getElementById("btnOpenEditorTab");
+    const rewardsCoins = document.getElementById("rewardsCoins");
+    const rewardGrid = document.getElementById("rewardGrid");
+    const historyCountBadge = document.getElementById("historyCountBadge");
+    const historyBody = document.getElementById("historyBody");
+    const statLessons = document.getElementById("statLessons");
+    const statLessonsTrend = document.getElementById("statLessonsTrend");
+    const statXP = document.getElementById("statXP");
+    const statXPTrend = document.getElementById("statXPTrend");
+    const statRuns = document.getElementById("statRuns");
+    const statRunsTrend = document.getElementById("statRunsTrend");
+    const profileName = document.getElementById("profileName");
+    const profileLevel = document.getElementById("profileLevel");
+    const profileBadges = document.getElementById("profileBadges");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const navCoinsSpan = document.getElementById("navCoins");
+    const navLessonsSpan = document.getElementById("navLessons");
+    const profileAvatar = document.getElementById("profileAvatar");
+    const sidebarAvatar = document.getElementById("sidebarAvatar");
+
+    const toast = document.getElementById("toast");
+    const toastTitle = document.getElementById("toastTitle");
+    const toastMessage = document.getElementById("toastMessage");
+    const toastClose = document.getElementById("toastClose");
+
+    const state = {
+      currentUser: null,
+      currentLessonId: null,
+      currentLang: "html",
+      runCount: 0,
+      rewards: [
+        { id: "badge_night", name: "Night Owl Badge", cost: 50, desc: "Unlocked by coding after dark.", owned: false },
+        { id: "badge_streak", name: "Streak Flame", cost: 40, desc: "Shows off your multi‑day streak.", owned: false },
+        { id: "theme_matrix", name: "Matrix Code Theme", cost: 60, desc: "Green neon rain background.", owned: false },
+        { id: "title_hacker", name: "“Playful Hacker” title", cost: 30, desc: "Appears under your name.", owned: false },
+        { id: "badge_variables", name: "Variables Wizard", cost: 20, desc: "Awarded when you master variables.", owned: false },
+        { id: "badge_loops", name: "Loop Explorer", cost: 25, desc: "Awarded when you use loops.", owned: false }
+      ],
+      lessons: [
+        {
+          id: "hello-console",
+          title: "Print your first message",
+          difficulty: "Beginner",
+          xp: 20,
+          coins: 10,
+          minutes: 3,
+          locked: false,
+          completed: false,
+          description: "Use console.log to print your first message in JavaScript.",
+          starter: {
+            html: "<h1>Open your DevTools console</h1>\n<p>Then run your JavaScript code to print a message.</p>",
+            css: "body { font-family: system-ui; padding: 16px; background: #0f172a; color: #e5e7eb; }\n h1 { color: #22c55e; }",
+            js: "// TODO: use console.log to print 'Hello, CodeSprout!'\n\n"
+          },
+          hint: "Type console.log('Hello, CodeSprout!'); in the JavaScript panel, then run your code.",
+          solution: "console.log('Hello, CodeSprout!');",
+          test: function (html, css, js) {
+            return js.replace(/\s/g, '').includes("console.log('Hello,CodeSprout!');") ||
+                   js.replace(/\s/g, '').includes('console.log("Hello,CodeSprout!");');
+          }
+        },
+        {
+          id: "change-text",
+          title: "Change text on button click",
+          difficulty: "Beginner",
+          xp: 25,
+          coins: 12,
+          minutes: 4,
+          locked: true,
+          completed: false,
+          description: "Make a button that changes the paragraph text when clicked.",
+          starter: {
+            html: "<h1>Click the button</h1>\n<p id=\"message\">Nothing yet…</p>\n<button id=\"magicBtn\">Change text</button>",
+            css: "body { font-family: system-ui; padding: 16px; background: #020617; color:#e5e7eb; }\nbutton{padding:8px 12px;border-radius:999px;border:none;background:#22c55e;color:#020617;cursor:pointer;}",
+            js: "// TODO: When the button is clicked, change the paragraph text to \"You clicked the button!\".\n\n"
+          },
+          hint: "Use document.getElementById('magicBtn') and addEventListener('click', ...), then update message.textContent.",
+          solution: "const btn = document.getElementById('magicBtn');\nconst msg = document.getElementById('message');\nbtn.addEventListener('click', () => {\n  msg.textContent = 'You clicked the button!';\n});",
+          test: function (html, css, js) {
+            return js.includes("getElementById") && js.includes("addEventListener") && js.includes("textContent");
+          }
+        },
+        {
+          id: "variables",
+          title: "Store your name in a variable",
+          difficulty: "Beginner",
+          xp: 25,
+          coins: 10,
+          minutes: 3,
+          locked: true,
+          completed: false,
+          description: "Create a variable for a name and show it on the page.",
+          starter: {
+            html: "<h1>Welcome!</h1>\n<p id=\"greeting\"></p>",
+            css: "body{font-family:system-ui;background:#020617;color:#e5e7eb;padding:16px;}",
+            js: "// TODO: create a variable called userName and set it to your name.\n// Then set greeting.textContent to \"Hello, \" + userName.\n\n"
+          },
+          hint: "Use const userName = 'Your Name'; then document.getElementById and textContent to display it.",
+          solution: "const userName = 'Ada';\nconst greeting = document.getElementById('greeting');\ngreeting.textContent = 'Hello, ' + userName;",
+          test: function (html, css, js) {
+            return js.includes("userName") && js.includes("greeting") && js.includes("textContent");
+          }
+        },
+        {
+          id: "loop-stars",
+          title: "Create a line of stars with a loop",
+          difficulty: "Beginner",
+          xp: 30,
+          coins: 14,
+          minutes: 5,
+          locked: true,
+          completed: false,
+          description: "Use a for loop to create ***** and show it in the browser.",
+          starter: {
+            html: "<h1>Stars</h1>\n<pre id=\"stars\"></pre>",
+            css: "body{font-family:system-ui;background:#020617;color:#e5e7eb;padding:16px;}\npre{font-size:24px;}",
+            js: "// TODO: build a string with 5 stars using a loop, then set starsEl.textContent.\n\n"
+          },
+          hint: "Start with let stars = ''; then loop from 0 to 4 and add '*' each time.",
+          solution: "let stars = '';\nfor (let i = 0; i < 5; i++) {\n  stars += '*';\n}\nconst starsEl = document.getElementById('stars');\nstarsEl.textContent = stars;",
+          test: function (html, css, js) {
+            return js.includes("for") && js.includes("stars") && js.includes("textContent");
+          }
+        },
+        {
+          id: "if-else",
+          title: "Check if a number is big",
+          difficulty: "Beginner",
+          xp: 30,
+          coins: 14,
+          minutes: 5,
+          locked: true,
+          completed: false,
+          description: "Ask for a number and show if it’s greater than 10.",
+          starter: {
+            html: "<h1>Is it big?</h1>\n<input id=\"numberInput\" type=\"number\" placeholder=\"Type a number\" />\n<button id=\"checkBtn\">Check</button>\n<p id=\"result\"></p>",
+            css: "body{font-family:system-ui;background:#020617;color:#e5e7eb;padding:16px;}\ninput,button{margin-top:8px;padding:6px 10px;border-radius:999px;border:none;}button{background:#22c55e;color:#020617;cursor:pointer;}",
+            js: "// TODO: when the button is clicked, read the number and check if it’s > 10.\n// Show a different message in result for big vs small numbers.\n\n"
+          },
+          hint: "Use parseInt(numberInput.value, 10) and an if (...) { ... } else { ... } block.",
+          solution: "const input = document.getElementById('numberInput');\nconst btn = document.getElementById('checkBtn');\nconst result = document.getElementById('result');\nbtn.addEventListener('click', () => {\n  const value = parseInt(input.value, 10);\n  if (value > 10) {\n    result.textContent = 'That is a big number!';\n  } else {\n    result.textContent = 'That is not so big.';\n  }\n});",
+          test: function (html, css, js) {
+            return js.includes("if") && js.includes("else") && js.includes("addEventListener");
+          }
+        },
+        {
+          id: "array-list",
+          title: "Show a list of favorite foods",
+          difficulty: "Beginner",
+          xp: 35,
+          coins: 16,
+          minutes: 6,
+          locked: true,
+          completed: false,
+          description: "Use an array and a loop to show a list of items.",
+          starter: {
+            html: "<h1>Favorite foods</h1>\n<ul id=\"foodList\"></ul>",
+            css: "body{font-family:system-ui;background:#020617;color:#e5e7eb;padding:16px;}\nli{margin-bottom:4px;}",
+            js: "// TODO: create an array of at least 3 foods.\n// For each one, create an li element and append it to foodList.\n\n"
+          },
+          hint: "Use const foods = ['Pizza', 'Burger', ...]; then forEach to append li elements.",
+          solution: "const foods = ['Pizza', 'Burger', 'Pasta'];\nconst list = document.getElementById('foodList');\nfoods.forEach(food => {\n  const li = document.createElement('li');\n  li.textContent = food;\n  list.appendChild(li);\n});",
+          test: function (html, css, js) {
+            return js.includes("foods") && js.includes("forEach") && js.includes("createElement");
+          }
+        }
+      ]
+    };
+
+    function getUsers() {
+      try {
+        return JSON.parse(localStorage.getItem(LS_KEY_USERS)) || {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function saveUsers(users) {
+      localStorage.setItem(LS_KEY_USERS, JSON.stringify(users));
+    }
+
+    function getSession() {
+      try {
+        return JSON.parse(localStorage.getItem(LS_KEY_SESSION)) || null;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function saveSession(session) {
+      if (session) {
+        localStorage.setItem(LS_KEY_SESSION, JSON.stringify(session));
+      } else {
+        localStorage.removeItem(LS_KEY_SESSION);
+      }
+    }
+
+    function getHistory() {
+      try {
+        return JSON.parse(localStorage.getItem(LS_KEY_HISTORY)) || {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function saveHistory(history) {
+      localStorage.setItem(LS_KEY_HISTORY, JSON.stringify(history));
+    }
+
+    function ensureProfile(username) {
+      const users = getUsers();
+      if (!users[username]) {
+        users[username] = {
+          password: null,
+          xp: 0,
+          coins: 0,
+          level: 1,
+          streak: 0,
+          lastLoginDate: null,
+          lessons: state.lessons.reduce((acc, lesson) => {
+            acc[lesson.id] = {
+              completed: false,
+              bestXP: 0,
+              lastTouched: null
+            };
+            return acc;
+          }, {}),
+          badges: [],
+          rewardsOwned: []
+        };
+        saveUsers(users);
+      }
+      return users[username];
+    }
+
+    function saveProfile(username, profile) {
+      const users = getUsers();
+      users[username] = {
+        ...users[username],
+        ...profile
+      };
+      saveUsers(users);
+    }
+
+    function computeLevel(xp) {
+      const level = Math.max(1, Math.floor(xp / 100) + 1);
+      const currentLevelXP = (level - 1) * 100;
+      const nextLevelXP = level * 100;
+      const progress = Math.min(100, ((xp - currentLevelXP) / (nextLevelXP - currentLevelXP)) * 100);
+      return { level, progress, currentLevelXP, nextLevelXP };
+    }
+
+    function showToast(title, message) {
+      toastTitle.textContent = title;
+      toastMessage.textContent = message;
+      toast.classList.remove("hidden");
+      if (toast._timer) {
+        clearTimeout(toast._timer);
+      }
+      toast._timer = setTimeout(() => {
+        toast.classList.add("hidden");
+      }, 3500);
+    }
+
+    toastClose.addEventListener("click", () => {
+      toast.classList.add("hidden");
+    });
+
+    function setScreen(screenKey) {
+      Object.entries(screens).forEach(([key, el]) => {
+        if (key === screenKey) {
+          el.classList.remove("hidden");
+        } else {
+          el.classList.add("hidden");
+        }
+      });
+      navItems.forEach(item => {
+        if (item.dataset.screen === screenKey) {
+          item.classList.add("active");
+        } else {
+          item.classList.remove("active");
+        }
+      });
+    }
+
+    navItems.forEach(item => {
+      item.addEventListener("click", () => {
+        const screen = item.dataset.screen;
+        setScreen(screen);
+      });
+    });
+
+    mobileMenuBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("open");
+    });
+
+    sidebar.addEventListener("click", (e) => {
+      if (e.target.closest(".nav-item")) {
+        sidebar.classList.remove("open");
+      }
+    });
+
+    function setAuthMode(mode) {
+      if (mode === "signup") {
+        chipSignup.classList.add("active");
+        chipLogin.classList.remove("active");
+        authTitle.textContent = "Get your free coding profile";
+        authSubtitle.textContent = "Choose a username – we’ll use it to save your lessons, coins and badges in this browser.";
+        authPrimaryLabel.textContent = "Create my profile";
+        authPrimaryBtn.dataset.mode = "signup";
+      } else {
+        chipSignup.classList.remove("active");
+        chipLogin.classList.add("active");
+        authTitle.textContent = "Welcome back";
+        authSubtitle.textContent = "Enter your username and password to continue where you left off.";
+        authPrimaryLabel.textContent = "Sign me in";
+        authPrimaryBtn.dataset.mode = "login";
+      }
+    }
+
+    chipSignup.addEventListener("click", () => setAuthMode("signup"));
+    chipLogin.addEventListener("click", () => setAuthMode("login"));
+
+    authLearnMore.addEventListener("click", (e) => {
+      e.preventDefault();
+      alert("CodeSprout stores your progress only inside this browser using localStorage. There is no real server or real accounts – it is a learning demo.");
+    });
+
+    authSecondaryBtn.addEventListener("click", () => {
+      const username = "Guest-" + Math.floor(Math.random() * 10000);
+      const profile = ensureProfile(username);
+      profile.password = null;
+      saveProfile(username, profile);
+      saveSession({ username });
+      state.currentUser = username;
+      enterApp();
+      showToast("Guest session", "You’re now in a temporary guest profile. Create a real username later if you like.");
+    });
+
+    authPrimaryBtn.addEventListener("click", () => {
+      const username = authUsername.value.trim();
+      const password = authPassword.value.trim();
+      if (!username || !password || password.length < 4) {
+        alert("Please enter a username and a password of at least 4 characters.");
+        return;
+      }
+      const mode = authPrimaryBtn.dataset.mode || "signup";
+      const users = getUsers();
+      if (mode === "signup") {
+        if (users[username] && users[username].password) {
+          alert("This username already exists. Try logging in instead.");
+          return;
+        }
+        const profile = ensureProfile(username);
+        profile.password = password;
+        profile.lastLoginDate = new Date().toISOString().slice(0, 10);
+        saveProfile(username, profile);
+        saveSession({ username });
+        state.currentUser = username;
+        enterApp();
+        showToast("Welcome to CodeSprout", "Profile created. Time to complete your first lesson.");
+      } else {
+        if (!users[username] || !users[username].password) {
+          alert("We couldn’t find this username. Try creating a new profile.");
+          return;
+        }
+        if (users[username].password !== password) {
+          alert("Password doesn’t match. Try again.");
+          return;
+        }
+        const profile = ensureProfile(username);
+        const today = new Date().toISOString().slice(0, 10);
+        if (profile.lastLoginDate && profile.lastLoginDate !== today) {
+          profile.streak = (profile.streak || 0) + 1;
+        } else if (!profile.lastLoginDate) {
+          profile.streak = 1;
+        }
+        profile.lastLoginDate = today;
+        saveProfile(username, profile);
+        saveSession({ username });
+        state.currentUser = username;
+        enterApp();
+        showToast("Welcome back", "Loaded your previous progress and coins.");
+      }
+    });
+
+    logoutBtn.addEventListener("click", () => {
+      saveSession(null);
+      state.currentUser = null;
+      authUsername.value = "";
+      authPassword.value = "";
+      authView.style.display = "flex";
+      appView.style.display = "none";
+    });
+
+    function enterApp() {
+      authView.style.display = "none";
+      appView.style.display = "flex";
+      loadUserData();
+      renderLessons();
+      renderRewards();
+      renderHistory();
+      setScreen("home");
+    }
+
+    function loadUserData() {
+      const session = getSession();
+      if (!session || !session.username) return;
+      const username = session.username;
+      state.currentUser = username;
+      const users = getUsers();
+      const profile = ensureProfile(username);
+      const xp = profile.xp || 0;
+      const coins = profile.coins || 0;
+      const levelInfo = computeLevel(xp);
+      const level = levelInfo.level;
+      const xpInLevel = xp - levelInfo.currentLevelXP;
+      const xpToNext = levelInfo.nextLevelXP - levelInfo.currentLevelXP;
+      const xpLabel = xpInLevel + " / " + xpToNext;
+
+      sidebarUsername.textContent = username;
+      sidebarRole.textContent = "Learner · Level " + level;
+      topbarGreeting.textContent = "Hi,";
+      topbarUsername.textContent = username;
+      badgeStreak.textContent = (profile.streak || 0) + " days";
+      chipLevel.textContent = level;
+      chipXP.textContent = xpLabel;
+      chipCoins.textContent = coins;
+      navXP.textContent = "Lvl " + level + " · " + xp + " XP";
+      navCoinsSpan.textContent = coins + " coins";
+
+      const lessonStatus = profile.lessons || {};
+      let completedCount = 0;
+      state.lessons.forEach(lesson => {
+        const ls = lessonStatus[lesson.id] || {};
+        lesson.completed = !!ls.completed;
+        if (lesson.completed) completedCount++;
+      });
+      const completedPercent = state.lessons.length
+        ? Math.round((completedCount / state.lessons.length) * 100)
+        : 0;
+      lessonsSummary.textContent = completedCount + " / " + state.lessons.length + " completed";
+      lessonsSummary2.textContent = lessonsSummary.textContent;
+      navLessonsSpan.textContent = completedCount + " / " + state.lessons.length + " done";
+      overallProgressFill.style.width = completedPercent + "%";
+      overallProgressLabel.textContent = "You’ve finished " + completedPercent + "% of this track.";
+      overallProgressXP.textContent = xp + " XP earned";
+
+      profileName.textContent = username;
+      profileLevel.textContent = "Level " + level + " · " + xp + " XP";
+
+      profileBadges.innerHTML = "";
+      const badges = profile.badges || [];
+      if (!badges.length) {
+        const span = document.createElement("span");
+        span.className = "profile-badge";
+        span.textContent = "Complete a few lessons to earn your first badge.";
+        profileBadges.appendChild(span);
+      } else {
+        badges.forEach(b => {
+          const span = document.createElement("span");
+          span.className = "profile-badge";
+          span.textContent = b;
+          profileBadges.appendChild(span);
+        });
+      }
+    }
+
+    function renderLessons() {
+      lessonListHome.innerHTML = "";
+      lessonListFull.innerHTML = "";
+
+      const session = getSession();
+      if (!session) return;
+      const profile = ensureProfile(session.username);
+      const lessonStatus = profile.lessons || {};
+
+      state.lessons.forEach((lesson, index) => {
+        const status = lessonStatus[lesson.id] || {};
+        const completed = !!status.completed;
+        const locked = lesson.locked && !completed;
+        let dotClass = "lesson-status-dot";
+        if (locked) dotClass += " locked";
+        else if (completed) dotClass += " completed";
+        else dotClass += " current";
+
+        const item = document.createElement("div");
+        item.className = "lesson-item";
+        item.dataset.lessonId = lesson.id;
+        if (state.currentLessonId === lesson.id) {
+          item.classList.add("active");
+        }
+        item.innerHTML = `
+          <div class="${dotClass}"></div>
+          <div class="lesson-main">
+            <strong>${lesson.title}</strong>
+            <span>${lesson.description}</span>
+          </div>
+          <div class="lesson-meta">
+            <span>${lesson.minutes} min</span>
+            <span>${lesson.xp} XP</span>
+            <span>${lesson.coins} 🪙</span>
+            <span class="pill-sm">${locked ? "LOCKED" : completed ? "DONE" : "READY"}</span>
+          </div>
+        `;
+        item.addEventListener("click", () => {
+          if (locked) {
+            alert("This lesson is locked. Complete earlier lessons to unlock it.");
+            return;
+          }
+          loadLessonIntoEditor(lesson.id);
+        });
+        if (index < 3) {
+          lessonListHome.appendChild(item.cloneNode(true));
+        }
+        lessonListFull.appendChild(item);
+      });
+    }
+
+    function getLessonById(id) {
+      return state.lessons.find(l => l.id === id);
+    }
+
+    function loadLessonIntoEditor(id) {
+      const lesson = getLessonById(id);
+      if (!lesson) return;
+      state.currentLessonId = id;
+      state.currentLang = "html";
+      state.runCount = 0;
+      editorTabs.forEach(tab => {
+        tab.classList.toggle("active", tab.dataset.lang === "html");
+      });
+      editorFilename.textContent = "index.html";
+      editorTextarea.value = lesson.starter.html;
+      editorStatus.textContent = "Editing HTML for \"" + lesson.title + "\"";
+      outputInner.innerHTML = '<div class="output-placeholder"><strong>Run your code to see it here.</strong><span>We’ll render your HTML, CSS and JavaScript inside a sandboxed iframe.</span></div>';
+      outputStatus.textContent = "Waiting for code…";
+      runCounter.textContent = "Runs: 0";
+      challengeXP.textContent = "+" + lesson.xp + " XP";
+      challengeCoins.textContent = lesson.coins;
+      challengeStatusBadge.textContent = "No attempt yet";
+      challengeStatusBadge.className = "badge";
+      activeLessonTitleSub.textContent = lesson.description;
+      activeLessonBadge.textContent = lesson.title;
+      activeLessonBadge.className = "badge-soft";
+      hintBox.classList.add("hidden");
+      solutionBox.classList.add("hidden");
+      hintText.textContent = lesson.hint;
+      solutionText.textContent = lesson.solution;
+      renderLessons();
+    }
+
+    editorTabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        const lang = tab.dataset.lang;
+        state.currentLang = lang;
+        editorTabs.forEach(t => t.classList.toggle("active", t === tab));
+        editorFilename.textContent = lang === "html" ? "index.html" : (lang === "css" ? "styles.css" : "script.js");
+        const lesson = getLessonById(state.currentLessonId);
+        if (!lesson) {
+          editorTextarea.value = "";
+          editorStatus.textContent = "Choose a lesson first.";
+          return;
+        }
+        editorStatus.textContent = "Editing " + editorFilename.textContent + " for \"" + lesson.title + "\"";
+        if (lang === "html") editorTextarea.value = lesson.starter.html;
+        if (lang === "css") editorTextarea.value = lesson.starter.css;
+        if (lang === "js") editorTextarea.value = lesson.starter.js;
+      });
+    });
+
+    btnResetCode.addEventListener("click", () => {
+      const lesson = getLessonById(state.currentLessonId);
+      if (!lesson) return;
+      const lang = state.currentLang;
+      editorTextarea.value = lesson.starter[lang];
+      editorStatus.textContent = "Starter code restored.";
+    });
+
+    function runCode() {
+      const lesson = getLessonById(state.currentLessonId);
+      const html = (lesson && state.currentLang === "html") ? editorTextarea.value : (lesson ? lesson.starter.html : "");
+      const css = (lesson && state.currentLang === "css") ? editorTextarea.value : (lesson ? lesson.starter.css : "");
+      const js = (lesson && state.currentLang === "js") ? editorTextarea.value : (lesson ? lesson.starter.js : "");
+
+      const doc = `
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<style>${css}</style>
+</head>
+<body>
+${html}
+<script>
+try {
+  ${js}
+} catch (e) {
+  document.body.innerHTML += '<pre style="background:#fee2e2;color:#991b1b;padding:8px;border-radius:8px;margin
